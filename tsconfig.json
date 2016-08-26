@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "es6",
+    "noImplicitAny": true,
+    "outDir": "./lib"
+  },
+  "filesGlob": [
+    "./src/**/*.ts"
+  ],
+  "files": [
+    "./src/AABB.ts",
+    "./src/Color3.ts",
+    "./src/Color4.ts",
+    "./src/Colors.ts",
+    "./src/gl-matrix.d.ts",
+    "./src/index.ts",
+    "./src/IVectorParseDescription.ts",
+    "./src/Matrix.ts",
+    "./src/MatrixArray.ts",
+    "./src/MatrixBase.ts",
+    "./src/PointList.ts",
+    "./src/Quaternion.ts",
+    "./src/Rectangle.ts",
+    "./src/Vector2.ts",
+    "./src/Vector3.ts",
+    "./src/Vector4.ts",
+    "./src/VectorArray.ts",
+    "./src/VectorBase.ts"
+  ],
+  "exclude": [],
+  "atom": {
+    "rewriteTsconfig": true
+  }
+}
