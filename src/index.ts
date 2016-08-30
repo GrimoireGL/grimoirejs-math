@@ -1,4 +1,4 @@
-///<reference path="./gl-matrix.d.ts"/>
+///<reference path="../src/gl-matrix.d.ts"/>
 export {default as AABB} from "./AABB";
 export {default as Color3} from "./Color3";
 export {default as Color4} from "./Color4";
