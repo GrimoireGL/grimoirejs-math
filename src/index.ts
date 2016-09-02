@@ -7,3 +7,4 @@ export {default as Vector3} from "./Vector3";
 export {default as Vector4} from "./Vector4";
 export {default as Matrix} from "./Matrix";
 export {default as Quaternion} from "./Quaternion";
+export {default as Rectangle} from "./Rectangle";
