@@ -17,7 +17,6 @@ import {
 import npm from 'rollup-plugin-node-resolve';
 import builtin from 'rollup-plugin-node-builtins';
 import commonjs from 'rollup-plugin-commonjs';
-import globals from 'rollup-plugin-node-globals';
 import sourcemaps from 'rollup-plugin-sourcemaps';
 import inject from 'rollup-plugin-inject';
 import chalk from 'chalk';
