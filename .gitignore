@@ -108,5 +108,5 @@ lib
 lib-ts
 lib-es5
 lib-test
-src/**/*.js
-product
+ref
+register

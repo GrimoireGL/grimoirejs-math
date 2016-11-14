@@ -2,8 +2,11 @@
   "compilerOptions": {
     "target": "es6",
     "module": "es6",
-    "noImplicitAny": true,
-    "outDir": "./lib"
+    "noImplicitAny": false,
+    "outDir": "../lib",
+    "declarationDir": "../ref",
+    "declaration": true,
+    "moduleResolution": "node"
   },
   "filesGlob": [
     "./src/**/*.ts"
@@ -16,6 +19,7 @@
     "./src/gl-matrix.d.ts",
     "./src/index.ts",
     "./src/IVectorParseDescription.ts",
+    "./src/main.ts",
     "./src/Matrix.ts",
     "./src/MatrixArray.ts",
     "./src/MatrixBase.ts",
