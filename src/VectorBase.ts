@@ -1,3 +1,5 @@
+///<reference path="./gl-matrix.d.ts"/>
+
 import {GLM} from "gl-matrix";
 import IVectorParseDescription from "./IVectorParseDescription";
 class VectorBase {

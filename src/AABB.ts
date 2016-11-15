@@ -1,3 +1,5 @@
+///<reference path="./gl-matrix.d.ts"/>
+
 import Vector3 from "./Vector3";
 /**
  * Axis-Aligned Bounding Box implementation
@@ -61,7 +63,7 @@ class AABB {
   }
 
   public toMathematicaCuboid(): string {
-    return `Cuboid[${this.pointLBF.toMathematicaString() },${this.pointRTN.toMathematicaString() }]`;
+    return `Cuboid[${this.pointLBF.toMathematicaString()},${this.pointRTN.toMathematicaString()}]`;
   }
 }
 

@@ -4,8 +4,8 @@ module.exports = {
     cache:true,
     entry: path.resolve(__dirname,"src/index.ts"),
     output: {
-        path: __dirname + "/register",
-        filename: "index.js",
+        path: __dirname,
+        filename: "register/index.js",
         libraryTarget:"umd"
     },
     module: {

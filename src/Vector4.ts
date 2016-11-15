@@ -1,3 +1,5 @@
+///<reference path="./gl-matrix.d.ts"/>
+
 import VectorBase from "./VectorBase";
 import {GLM, vec4} from "gl-matrix";
 
@@ -193,7 +195,7 @@ class Vector4 extends VectorBase {
   }
 
   public toDisplayString(): string {
-    return `Vector4${this.toString() }`;
+    return `Vector4${this.toString()}`;
   }
 
   public toMathematicaString(): string {

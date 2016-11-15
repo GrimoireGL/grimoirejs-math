@@ -1,3 +1,5 @@
+///<reference path="./gl-matrix.d.ts"/>
+
 import {GLM} from "gl-matrix";
 class MatrixBase {
 
