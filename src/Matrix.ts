@@ -1,3 +1,4 @@
+///<reference path="./gl-matrix.d.ts"/>
 
 import MatrixBase from "./MatrixBase";
 import Vector3 from "./Vector3";
@@ -212,17 +213,17 @@ class Matrix extends MatrixBase {
   }
 
   public toString(): string {
-    return (`|${this.getBySingleIndex(0) } ${this.getBySingleIndex(4) } ${this.getBySingleIndex(8) } ${this.getBySingleIndex(12) }|\n
-                 |${this.getBySingleIndex(1) } ${this.getBySingleIndex(5) } ${this.getBySingleIndex(9) } ${this.getBySingleIndex(13) }|\n
-                 |${this.getBySingleIndex(2) } ${this.getBySingleIndex(6) } ${this.getBySingleIndex(10) } ${this.getBySingleIndex(14) }|\n
-                 |${this.getBySingleIndex(3) } ${this.getBySingleIndex(7) } ${this.getBySingleIndex(11) } ${this.getBySingleIndex(15) }|`);
+    return (`|${this.getBySingleIndex(0)} ${this.getBySingleIndex(4)} ${this.getBySingleIndex(8)} ${this.getBySingleIndex(12)}|\n
+                 |${this.getBySingleIndex(1)} ${this.getBySingleIndex(5)} ${this.getBySingleIndex(9)} ${this.getBySingleIndex(13)}|\n
+                 |${this.getBySingleIndex(2)} ${this.getBySingleIndex(6)} ${this.getBySingleIndex(10)} ${this.getBySingleIndex(14)}|\n
+                 |${this.getBySingleIndex(3)} ${this.getBySingleIndex(7)} ${this.getBySingleIndex(11)} ${this.getBySingleIndex(15)}|`);
   }
 
   public toMathematicaString(): string {
-    return (`{{${this.getBySingleIndex(0) },${this.getBySingleIndex(4) },${this.getBySingleIndex(8) },${this.getBySingleIndex(12) }},
-                  {${this.getBySingleIndex(1) },${this.getBySingleIndex(5) },${this.getBySingleIndex(9) },${this.getBySingleIndex(13) }},
-                  {${this.getBySingleIndex(2) },${this.getBySingleIndex(6) },${this.getBySingleIndex(10) },${this.getBySingleIndex(14) }},
-                  {${this.getBySingleIndex(3) },${this.getBySingleIndex(7) },${this.getBySingleIndex(11) },${this.getBySingleIndex(15) }}}`);
+    return (`{{${this.getBySingleIndex(0)},${this.getBySingleIndex(4)},${this.getBySingleIndex(8)},${this.getBySingleIndex(12)}},
+                  {${this.getBySingleIndex(1)},${this.getBySingleIndex(5)},${this.getBySingleIndex(9)},${this.getBySingleIndex(13)}},
+                  {${this.getBySingleIndex(2)},${this.getBySingleIndex(6)},${this.getBySingleIndex(10)},${this.getBySingleIndex(14)}},
+                  {${this.getBySingleIndex(3)},${this.getBySingleIndex(7)},${this.getBySingleIndex(11)},${this.getBySingleIndex(15)}}}`);
   }
 
   public get ElementCount(): number { return 16; }

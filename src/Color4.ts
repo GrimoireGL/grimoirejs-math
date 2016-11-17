@@ -1,3 +1,5 @@
+///<reference path="./gl-matrix.d.ts"/>
+
 import VectorBase from "./VectorBase";
 import Vector4 from "./Vector4";
 import Colors from "./Colors";

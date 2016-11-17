@@ -1,3 +1,5 @@
+///<reference path="./gl-matrix.d.ts"/>
+
 import Vector3 from "./Vector3";
 import {GLM, vec3, quat} from "gl-matrix";
 import Matrix from "./Matrix";

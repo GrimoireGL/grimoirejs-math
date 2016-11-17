@@ -107,6 +107,6 @@ $RECYCLE.BIN/
 lib
 lib-ts
 lib-es5
-lib-test
-src/**/*.js
-product
+test-es5
+ref
+register

@@ -1,3 +1,5 @@
+///<reference path="./gl-matrix.d.ts"/>
+
 import VectorBase from "./VectorBase";
 import {GLM, vec2} from "gl-matrix";
 class Vector2 extends VectorBase {
@@ -162,7 +164,7 @@ class Vector2 extends VectorBase {
   }
 
   public toDisplayString(): string {
-    return `Vector2${this.toString() }`;
+    return `Vector2${this.toString()}`;
   }
 
   public get ElementCount(): number { return 2; }
