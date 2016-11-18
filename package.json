@@ -1,6 +1,6 @@
 {
     "name": "grimoirejs-math",
-    "version": "1.4.1",
+    "version": "1.4.2",
     "description": "The basement library for math of grimoire.js",
     "main": "./ref/index.js",
     "typings": "./ref/index.d.ts",
@@ -26,7 +26,6 @@
         "grimoirejs-cauldron": "^2.1.0",
         "ts-loader": "^1.2.0",
         "typescript": "^2.0.9",
-        "watch": "^0.19.2",
         "webpack": "^1.13.3",
         "webpack-shell-plugin": "^0.4.3"
     },
