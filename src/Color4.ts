@@ -61,11 +61,11 @@ class Color4 extends VectorBase {
         );
       }
     }
-    let n = color.match(/^rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)$/i);
+    let n = color.match(/^\s*rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)\s*$/i);
     if (n && isFirst) {
       return new Color4(parseInt(n[1], 10) / 0xff, parseInt(n[2], 10) / 0xff, parseInt(n[3], 10) / 0xff, 1);
     }
-    n = color.match(/^rgba\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\,\s*((?:0\.)?\d+)\s*\)$/i);
+    n = color.match(/^\s*rgba\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\,\s*(0|1|0\.\d+)\s*\)\s*$/i);
     if (n && isFirst) {
       let d = parseInt(n[4], 10);
       d = d <= 1 ? d : d / 0xff;
