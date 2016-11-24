@@ -54,17 +54,6 @@ class PointList {
     }
     return aabb;
   }
-
-  public toMathematicaPoints(): string {
-    let points = "";
-    for (let i = 0; i < this.points.length; i++) {
-      if (i !== 0) {
-        points += `,`;
-      }
-      points += this.points[i].toMathematicaString();
-    }
-    return `Point[{${points}}]`;
-  }
 }
 
 export default PointList;

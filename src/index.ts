@@ -2,8 +2,8 @@
   import Color3 from "./Color3";
   import Color4 from "./Color4";
   import Colors from "./Colors";
+  import GLM from "./GLM";
   import Matrix from "./Matrix";
-  import MatrixArray from "./MatrixArray";
   import MatrixBase from "./MatrixBase";
   import PointList from "./PointList";
   import Quaternion from "./Quaternion";
@@ -11,7 +11,6 @@
   import Vector2 from "./Vector2";
   import Vector3 from "./Vector3";
   import Vector4 from "./Vector4";
-  import VectorArray from "./VectorArray";
   import VectorBase from "./VectorBase";
   import __INTERFACE__1 from "./IVectorParseDescription";
 
@@ -22,8 +21,8 @@ var __EXPOSE__ = {
   "Color3": Color3,
   "Color4": Color4,
   "Colors": Colors,
+  "GLM": GLM,
   "Matrix": Matrix,
-  "MatrixArray": MatrixArray,
   "MatrixBase": MatrixBase,
   "PointList": PointList,
   "Quaternion": Quaternion,
@@ -31,7 +30,6 @@ var __EXPOSE__ = {
   "Vector2": Vector2,
   "Vector3": Vector3,
   "Vector4": Vector4,
-  "VectorArray": VectorArray,
   "VectorBase": VectorBase
 };
 

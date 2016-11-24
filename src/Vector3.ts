@@ -118,10 +118,6 @@ class Vector3 extends VectorBase {
     this.rawElements = [<number>x, y, z];
   }
 
-  public toMathematicaString(): string {
-    return `{${this.X},${this.Y},${this.Z}}`;
-  }
-
   public get normalized() {
     return this.multiplyWith(1 / this.magnitude);
   }

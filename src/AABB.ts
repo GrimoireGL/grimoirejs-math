@@ -61,10 +61,6 @@ class AABB {
     this.pointLBF = null;
     this.pointRTN = null;
   }
-
-  public toMathematicaCuboid(): string {
-    return `Cuboid[${this.pointLBF.toMathematicaString()},${this.pointRTN.toMathematicaString()}]`;
-  }
 }
 
 export default AABB;
