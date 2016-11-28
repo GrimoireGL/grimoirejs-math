@@ -5,6 +5,12 @@ import Vector3 from "./Vector3";
  * Axis-Aligned Bounding Box implementation
  */
 class AABB {
+
+  constructor(initialPoints?: Vector3[]) {
+    if (initialPoints) {
+      initialPoints.forEach(f => this.expand(f));
+    }
+  }
   /**
    * AABB's vertex in most left,most bottom,most far.
    * @type {Vector3}
@@ -16,6 +22,12 @@ class AABB {
   * @type {Vector3}
   */
   public pointRTN: Vector3;
+
+  /**
+   * Center of this AABB
+   * @type {Vector3}
+   */
+  private _center: Vector3;
 
   /**
    * Width of this AABB
@@ -38,12 +50,16 @@ class AABB {
     return Math.abs(this.pointLBF.Z - this.pointRTN.Z);
   }
 
+  public get Center(): Vector3 {
+    return this._center ? this._center : (this._center = Vector3.add(this.pointLBF, this.pointRTN).multiplyWith(0.5));
+  }
+
 
   /**
    * Calculate new bounding box with considering the new point is included.
    * @param  {Vector3} newPoint the point that will be considered that it should be in this bounding box.
    */
-  public expandAABB(newPoint: Vector3): void {
+  public expand(newPoint: Vector3): this {
     if (this.pointLBF == null) {
       // assume this is first time to be used this AABB instance
       this.pointLBF = Vector3.copy(newPoint);
@@ -52,6 +68,8 @@ class AABB {
 
     this.pointLBF = Vector3.min(newPoint, this.pointLBF);
     this.pointRTN = Vector3.max(newPoint, this.pointRTN);
+    this._center = null;
+    return this;
   }
 
   /**
@@ -60,6 +78,7 @@ class AABB {
   public clear(): void {
     this.pointLBF = null;
     this.pointRTN = null;
+    this._center = null;
   }
 }
 

@@ -5,7 +5,6 @@
   import GLM from "./GLM";
   import Matrix from "./Matrix";
   import MatrixBase from "./MatrixBase";
-  import PointList from "./PointList";
   import Quaternion from "./Quaternion";
   import Rectangle from "./Rectangle";
   import Vector2 from "./Vector2";
@@ -24,7 +23,6 @@ var __EXPOSE__ = {
   "GLM": GLM,
   "Matrix": Matrix,
   "MatrixBase": MatrixBase,
-  "PointList": PointList,
   "Quaternion": Quaternion,
   "Rectangle": Rectangle,
   "Vector2": Vector2,

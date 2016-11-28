@@ -23,7 +23,6 @@
     "./src/main.ts",
     "./src/Matrix.ts",
     "./src/MatrixBase.ts",
-    "./src/PointList.ts",
     "./src/Quaternion.ts",
     "./src/Rectangle.ts",
     "./src/Vector2.ts",
