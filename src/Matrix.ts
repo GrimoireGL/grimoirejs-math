@@ -212,6 +212,24 @@ class Matrix extends MatrixBase {
     return Matrix.equals(m, this);
   }
 
+  public getTranslation(): Vector3 {
+    const res = [0, 0, 0];
+    mat4.getTranslation(res, this.rawElements);
+    return new Vector3(res);
+  }
+
+  public getScaling(): Vector3 {
+    const res = [0, 0, 0];
+    mat4.getScaling(res, this.rawElements);
+    return new Vector3(res);
+  }
+
+  public getRotation(): Quaternion {
+    const res = [0, 0, 0, 0];
+    mat4.getRotation(res, this.rawElements);
+    return new Quaternion(res);
+  }
+
   public toString(): string {
     return (`|${this.getBySingleIndex(0)} ${this.getBySingleIndex(4)} ${this.getBySingleIndex(8)} ${this.getBySingleIndex(12)}|\n
                  |${this.getBySingleIndex(1)} ${this.getBySingleIndex(5)} ${this.getBySingleIndex(9)} ${this.getBySingleIndex(13)}|\n
