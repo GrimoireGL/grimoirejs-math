@@ -65,7 +65,7 @@ class VectorBase {
   }
 
   protected static __parse(str: string): IVectorParseDescription {
-    const checkRegex = /(-?)([\d,E\+\-\.]+)?(n)?\(([-\d,E\+\.\s]+)\)/g;
+    const checkRegex = /(-?)([\d,Ee\+\-\.]+)?(n)?\(([-\d,Ee\+\.\s]+)\)/g;
     const matches = checkRegex.exec(str);
     if (matches) {
       if (!matches[4]) { // When (x,x,x,x) was not specifed
