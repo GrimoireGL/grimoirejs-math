@@ -2,12 +2,20 @@
   import Color3 from "./Color3";
   import Color4 from "./Color4";
   import Colors from "./Colors";
+  import ConvertersAngle2DConverter from "./Converters/Angle2DConverter";
+  import ConvertersColor3Converter from "./Converters/Color3Converter";
+  import ConvertersColor4Converter from "./Converters/Color4Converter";
+  import ConvertersRotation3Converter from "./Converters/Rotation3Converter";
+  import ConvertersVector2Converter from "./Converters/Vector2Converter";
+  import ConvertersVector3Converter from "./Converters/Vector3Converter";
+  import ConvertersVector4Converter from "./Converters/Vector4Converter";
   import Matrix from "./Matrix";
   import MatrixArray from "./MatrixArray";
   import MatrixBase from "./MatrixBase";
   import PointList from "./PointList";
   import Quaternion from "./Quaternion";
   import Rectangle from "./Rectangle";
+  import UtilAngle2DParser from "./Util/Angle2DParser";
   import Vector2 from "./Vector2";
   import Vector3 from "./Vector3";
   import Vector4 from "./Vector4";
@@ -22,12 +30,24 @@ var __EXPOSE__ = {
   "Color3": Color3,
   "Color4": Color4,
   "Colors": Colors,
+  "Converters": {
+    "Angle2DConverter": ConvertersAngle2DConverter,
+    "Color3Converter": ConvertersColor3Converter,
+    "Color4Converter": ConvertersColor4Converter,
+    "Rotation3Converter": ConvertersRotation3Converter,
+    "Vector2Converter": ConvertersVector2Converter,
+    "Vector3Converter": ConvertersVector3Converter,
+    "Vector4Converter": ConvertersVector4Converter
+  },
   "Matrix": Matrix,
   "MatrixArray": MatrixArray,
   "MatrixBase": MatrixBase,
   "PointList": PointList,
   "Quaternion": Quaternion,
   "Rectangle": Rectangle,
+  "Util": {
+    "Angle2DParser": UtilAngle2DParser
+  },
   "Vector2": Vector2,
   "Vector3": Vector3,
   "Vector4": Vector4,
