@@ -21,6 +21,9 @@
   import VectorBase from "./VectorBase";
   import __INTERFACE__1 from "./IVectorParseDescription";
 
+var __VERSION__ = "1.8.0";
+var __NAME__ = "grimoirejs-math";
+
 import __MAIN__ from "./main"
 
 var __EXPOSE__ = {
@@ -53,6 +56,10 @@ var __EXPOSE__ = {
 
 let __BASE__ = __MAIN__();
 
+Object.assign(__EXPOSE__,{
+    __VERSION__:__VERSION__,
+    __NAME__:__NAME__
+});
 Object.assign(__BASE__|| {},__EXPOSE__);
 
 window["GrimoireJS"].lib.math = __EXPOSE__;
