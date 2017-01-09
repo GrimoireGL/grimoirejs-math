@@ -198,10 +198,6 @@ class Vector4 extends VectorBase {
     return `Vector4${this.toString()}`;
   }
 
-  public toMathematicaString(): string {
-    return `{${this.X},${this.Y},${this.Z},${this.W}}`;
-  }
-
 }
 
 

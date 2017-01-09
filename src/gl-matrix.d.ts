@@ -1593,6 +1593,12 @@ declare module "gl-matrix" {
   // mat4
   export module mat4 {
 
+    export function getScaling(out: GLM.IArray, mat: GLM.IArray): GLM.IArray;
+
+    export function getRotation(out: GLM.IArray, mat: GLM.IArray): GLM.IArray;
+
+    export function getTranslation(out: GLM.IArray, mat: GLM.IArray): GLM.IArray;
+
     /**
      * Creates a new identity mat4
      *

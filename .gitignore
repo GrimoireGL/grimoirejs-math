@@ -104,9 +104,12 @@ $RECYCLE.BIN/
 # Linux trash folder which might appear on any partition or disk
 .Trash-*
 
+yarn.lock
+
 lib
 lib-ts
 lib-es5
 test-es5
 ref
 register
+yarn.lock

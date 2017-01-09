@@ -212,18 +212,29 @@ class Matrix extends MatrixBase {
     return Matrix.equals(m, this);
   }
 
+  public getTranslation(): Vector3 {
+    const res = [0, 0, 0];
+    mat4.getTranslation(res, this.rawElements);
+    return new Vector3(res);
+  }
+
+  public getScaling(): Vector3 {
+    const res = [0, 0, 0];
+    mat4.getScaling(res, this.rawElements);
+    return new Vector3(res);
+  }
+
+  public getRotation(): Quaternion {
+    const res = [0, 0, 0, 0];
+    mat4.getRotation(res, this.rawElements);
+    return new Quaternion(res);
+  }
+
   public toString(): string {
     return (`|${this.getBySingleIndex(0)} ${this.getBySingleIndex(4)} ${this.getBySingleIndex(8)} ${this.getBySingleIndex(12)}|\n
                  |${this.getBySingleIndex(1)} ${this.getBySingleIndex(5)} ${this.getBySingleIndex(9)} ${this.getBySingleIndex(13)}|\n
                  |${this.getBySingleIndex(2)} ${this.getBySingleIndex(6)} ${this.getBySingleIndex(10)} ${this.getBySingleIndex(14)}|\n
                  |${this.getBySingleIndex(3)} ${this.getBySingleIndex(7)} ${this.getBySingleIndex(11)} ${this.getBySingleIndex(15)}|`);
-  }
-
-  public toMathematicaString(): string {
-    return (`{{${this.getBySingleIndex(0)},${this.getBySingleIndex(4)},${this.getBySingleIndex(8)},${this.getBySingleIndex(12)}},
-                  {${this.getBySingleIndex(1)},${this.getBySingleIndex(5)},${this.getBySingleIndex(9)},${this.getBySingleIndex(13)}},
-                  {${this.getBySingleIndex(2)},${this.getBySingleIndex(6)},${this.getBySingleIndex(10)},${this.getBySingleIndex(14)}},
-                  {${this.getBySingleIndex(3)},${this.getBySingleIndex(7)},${this.getBySingleIndex(11)},${this.getBySingleIndex(15)}}}`);
   }
 
   public get ElementCount(): number { return 16; }
