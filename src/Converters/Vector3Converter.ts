@@ -6,7 +6,7 @@ function Vector3Converter(this: Attribute, val: any): any {
   if (val instanceof Vector3) {
     return val;
   } else if (typeof val === "string") {
-    return Vector3.parse(val);
+    return Vector3.parse(val); // TODO: to do not throws execptions.
   } else if (typeof val == "number") {
     return new Vector3(val, val, val);
   } else if (Array.isArray(val)) {
