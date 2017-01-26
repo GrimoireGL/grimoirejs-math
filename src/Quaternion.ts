@@ -3,6 +3,8 @@
 import Vector3 from "./Vector3";
 import {GLM, vec3, quat} from "gl-matrix";
 import Matrix from "./Matrix";
+import Angle2DParser from "./Util/Angle2DParser";
+
 /**
 * The class to maniplate quaternion.
 * Basically,you don't need to operate raw element.
@@ -24,6 +26,50 @@ class Quaternion {
     }
     return true;
   }
+
+  /**
+   * Parse angle string in 3D.
+   * "p" means Pi. Ex) 3/4 p
+   * "d" means degree. if this unit was specified, the argument will be parsed as degree. Ex) 90d
+   * "eular(x,y,z)" means rotation in eular. This means Z-X-Y rotation like Unity.
+   * "axis(angle,x,y,z)" means rotation around specified axis. This means angle radians will be rotated around the axis (x,y,z).
+   * This angle can be specified with the character "p" or "d".
+   * "x(angle)","y(angle)" or "z(angle)" means rotation around unit axis.
+   * This angle can be specified with the character "p" or "d".
+   * @param input the string to be parsed as angle in 3D.
+   * @returns {Quaternion} parsed rotation in Quaternion.
+   */
+  public static parse(input: string): Quaternion {
+    const reg1 = /^ *(x|y|z) *\(([^\(\)]+)\) *$/gm;
+    const reg2 = /^ *axis *\(([^\(\),]+),([^\(\),]+),([^\(\),]+),([^\(\),]+)\) *$/gm;
+    const reg3 = /^ *([^\(\),]+),([^\(\),]+),([^\(\),]+) *$/gm;
+    const result = reg1.exec(input);
+    if (result) {
+      if (result[1] === "x") {
+        return Quaternion.angleAxis(Angle2DParser.parseAngle(result[2]), Vector3.XUnit);
+      }
+      if (result[1] === "y") {
+        return Quaternion.angleAxis(Angle2DParser.parseAngle(result[2]), Vector3.YUnit);
+      }
+      if (result[1] === "z") {
+        return Quaternion.angleAxis(Angle2DParser.parseAngle(result[2]), Vector3.ZUnit);
+      }
+    }
+    const res2 = reg2.exec(input);
+    if (res2) {
+      let rotation = Angle2DParser.parseAngle(res2[1]);
+      let x = parseFloat(res2[2]);
+      let y = parseFloat(res2[3]);
+      let z = parseFloat(res2[4]);
+      return Quaternion.angleAxis(rotation, new Vector3(x, y, z));
+    }
+    const res3 = reg3.exec(input);
+    if (res3) {
+      return Quaternion.euler(Angle2DParser.parseAngle(res3[1]), Angle2DParser.parseAngle(res3[2]), Angle2DParser.parseAngle(res3[3]));
+    }
+    throw new Error(`Unknown format for rotation3D:'${input}'`);
+  }
+
 
 
   /**

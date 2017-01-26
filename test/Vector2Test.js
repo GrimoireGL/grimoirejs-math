@@ -137,7 +137,3 @@ test('a vector to string', (t) => {
 test('a vector to display string', (t) => {
   t.truthy((new Vector2(1, 2)).toDisplayString() === 'Vector2(1, 2)');
 });
-
-test('a vector to mathematicastring', (t) => {
-  t.truthy((new Vector2(1, 2)).toMathematicaString() === '{1, 2}');
-});

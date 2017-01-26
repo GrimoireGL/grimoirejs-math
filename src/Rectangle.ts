@@ -58,6 +58,11 @@ class Rectangle {
     return this.Left <= x && this.Right >= x && this.Top <= y && this.Bottom >= y;
   }
 
+  /**
+   * Convert absolute coodinate to local coordinate
+   * @param  {Vector2} x [description]
+   * @return {Vector2}   [description]
+   */
   public toLocal(x: Vector2): Vector2;
   public toLocal(x: number, y: number): number[];
   public toLocal(xOrPoint: Vector2 | number, y?: number): any {
@@ -70,9 +75,42 @@ class Rectangle {
     }
     x -= this.Left;
     y -= this.Top;
-
     return xOrPoint instanceof Vector2 ? new Vector2(x, y) : [x, y];
   }
+
+  /**
+   * Convert relative ratio of position in the rectangle from absolute coordinate
+   * @param  {Vector2} x [description]
+   * @return {Vector2}   [description]
+   */
+  public toLocalNormalized(x: Vector2): Vector2;
+  public toLocalNormalized(x: number, y: number): number[];
+  public toLocalNormalized(xOrPoint: Vector2 | number, y?: number): any {
+    if(xOrPoint instanceof Vector2){
+      const v = this.toLocal(xOrPoint);
+      return new Vector2(v.X / this.Width, v.Y / this.Height);
+    }else{
+      const v = this.toLocal(xOrPoint,y);
+      return [v[0]/this.Width, v[1]/ this.Height];
+    }
+  }
+
+  /**
+   * Convert local coordinate to absolute coordinate
+   * @param  {Vector2} x [description]
+   * @return {Vector2}   [description]
+   */
+  public toAbsolute(x: Vector2): Vector2;
+  public toAbsolute(x: number, y: number): number[];
+  public toAbsolute(xOrPoint: Vector2 | number, y?: number): any {
+    if(xOrPoint instanceof Vector2){
+      return new Vector2(xOrPoint.X + this.Left, xOrPoint.Y + this.Top);
+    }else{
+      return [xOrPoint + this.Left, y + this.Top];
+    }
+  }
+
+
 
   public toString(): string {
     return `Rectangle(${this.Left},${this.Top}-${this.Right},${this.Bottom})`;
