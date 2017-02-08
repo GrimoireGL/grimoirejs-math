@@ -30,9 +30,6 @@
     "webpack": "^1.14.0",
     "webpack-shell-plugin": "^0.5.0"
   },
-  "peerDependencies": {
-    "grimoirejs": "latest"
-  },
   "repository": "",
   "scripts": {
     "test": "tsc --outDir ./lib && babel ./lib --presets es2015  --plugin transform-runtime --out-dir ./lib-es5 && babel ./test --presets es2015  --plugin transform-runtime --out-dir ./test-es5 && ava ./test-es5/**/*Test.js --verbose ",
