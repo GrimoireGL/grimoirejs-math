@@ -24,7 +24,7 @@
 var __VERSION__ = "1.10.1";
 var __NAME__ = "grimoirejs-math";
 
-import __MAIN__ from "./main"
+import __MAIN__ from "./main";
 
 var __EXPOSE__ = {
   "AABB": AABB,
