@@ -74,7 +74,7 @@ class Color4 extends VectorBase {
     if (tryParse) {
       return undefined;
     }
-    throw new Error("Unexpected color string" + color);
+    return null;
   }
 
   public static parse(color: string, tryParse?: boolean): Color4 {
