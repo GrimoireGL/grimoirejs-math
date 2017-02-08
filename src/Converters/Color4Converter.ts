@@ -13,7 +13,7 @@ function Color4Converter(this: Attribute, val: any): any {
   } else if (Array.isArray(val)) {
     return new Color4(val[0], val[1], val[2], val[3]);
   } else {
-    throw new Error(`${val} can not be parsed as Color4.`);
+    return null;
   }
 }
 
