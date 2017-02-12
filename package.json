@@ -1,6 +1,6 @@
 {
   "name": "grimoirejs-math",
-  "version": "0.0.0-development",
+  "version": "1.12.0",
   "description": "The basement library for math of grimoire.js",
   "main": "./ref/index.js",
   "typings": "./ref/index.d.ts",
