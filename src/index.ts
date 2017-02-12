@@ -21,10 +21,10 @@
   import VectorBase from "./VectorBase";
   import __INTERFACE__1 from "./IVectorParseDescription";
 
-var __VERSION__ = "1.11.0";
+var __VERSION__ = "0.0.0-development";
 var __NAME__ = "grimoirejs-math";
 
-import __MAIN__ from "./main"
+import __MAIN__ from "./main";
 
 var __EXPOSE__ = {
   "AABB": AABB,
