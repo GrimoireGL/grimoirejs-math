@@ -21,7 +21,7 @@
   import VectorBase from "./VectorBase";
   import __INTERFACE__1 from "./IVectorParseDescription";
 
-var __VERSION__ = "1.10.1";
+var __VERSION__ = "0.0.0-development";
 var __NAME__ = "grimoirejs-math";
 
 import __MAIN__ from "./main";
