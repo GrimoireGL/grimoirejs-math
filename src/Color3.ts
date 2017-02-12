@@ -54,7 +54,7 @@ class Color3 extends VectorBase {
     if (tryParse) {
       return undefined;
     }
-    throw new Error("Unexpected color string" + color);
+    return null;
   }
 
   public static equals(col1: Color3, col2: Color3): boolean {
