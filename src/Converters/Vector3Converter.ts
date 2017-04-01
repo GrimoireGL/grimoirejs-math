@@ -11,6 +11,10 @@ function Vector3Converter(this: Attribute, val: any): any {
     return new Vector3(val, val, val);
   } else if (Array.isArray(val)) {
     return new Vector3(val[0], val[1], val[2]);
+  } else if(val[0] !== void 0 && val[1] !== void 0 && val[2] !== void 0){
+    return new Vector3(val[0], val[1], val[2]);
+  } else if(val.X !== void 0 && val.Y !== void 0 && val.Z !== void 0){
+    return new Vector3(val.X,val.Y,val.Z);
   }
 }
 
