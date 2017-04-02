@@ -28,6 +28,7 @@
     "grimoirejs-cauldron": "^2.2.4",
     "semantic-release": "^6.3.2",
     "ts-loader": "^2.0.3",
+    "typedoc": "git://github.com/GrimoireGL/typedoc#includeAll",
     "typescript": "^2.2.2",
     "webpack": "^2.3.2",
     "webpack-shell-plugin": "^0.5.0"
@@ -44,7 +45,8 @@
     "build": "webpack --progress",
     "prebuild": "cauldron generate-exposure --src ./src --dest ./src/index.ts --ts --main ./src/main.ts --dts ./ref",
     "postbuild": "cauldron generate-reference --src ./src --dest ./src/index.ts --ts --main ./src/main.ts --dts ./ref",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "doc": "typedoc --out ./docs/ --options typedoc.json  ./tsconfig.json"
   },
   "license": "MIT",
   "release": {
