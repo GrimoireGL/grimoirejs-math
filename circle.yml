@@ -17,6 +17,6 @@ dependencies:
 
 test:
   post:
-    - npm run semantic-release || true
+    - sh release.sh
   override:
     - npm run build && npm test
