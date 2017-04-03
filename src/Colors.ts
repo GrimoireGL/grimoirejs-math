@@ -1,4 +1,7 @@
 
+/**
+ * Color name to color value table.
+ */
 export default {
   "aliceblue": "#F0F8FF",
   "antiquewhite": "#FAEBD7",
