@@ -2,12 +2,21 @@
 
 import {GLM} from "gl-matrix";
 import IVectorParseDescription from "./IVectorParseDescription";
+/**
+ * Base class of vector.
+ */
 class VectorBase {
 
+  /**
+   * Actual array represents components of this instance.
+   */
   public rawElements: GLM.IArray;
   private _magnitudeSquaredCache: number = -1;
   private _magnitudeCache: number = -1;
 
+  /**
+   * Length of this vector.
+   */
   public get magnitude() {
     if (this._magnitudeCache < 0) {
       this._magnitudeCache = Math.sqrt(this.sqrMagnitude);
@@ -15,10 +24,18 @@ class VectorBase {
     return this._magnitudeCache;
   }
 
+  /**
+   * Element count of this instance.
+   * This is for override.
+   * @return {number} [description]
+   */
   public get ElementCount(): number {
     return 0;
   }
 
+  /**
+   * Get squred length of this elements.
+   */
   public get sqrMagnitude(): number {
     if (this._magnitudeSquaredCache < 0) {
       let sum = 0;
