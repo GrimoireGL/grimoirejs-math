@@ -160,7 +160,7 @@ class Quaternion {
     }
     if (m11 > m22) {
       const num6 = Math.sqrt(1 + m11 - m00 - m22);
-      return new Quaternion([(m10 + m01) * 0, 5 / num6, 0.5 * num6, (m21 + m12) * 0.5 / num6, (m20 - m02) * 0.5 / num6]);
+      return new Quaternion([(m10 + m01) * 0.5 / num6, 0.5 * num6, (m21 + m12) * 0.5 / num6, (m20 - m02) * 0.5 / num6]);
     }
     const num5 = Math.sqrt(1 + m22 - m00 - m11);
     return new Quaternion([(m20 + m02) * 0.5 / num5, (m21 + m12) * 0.5 / num5, 0.5 * num5, (m01 - m10) * 0.5 / num5]);
