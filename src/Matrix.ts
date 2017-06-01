@@ -408,7 +408,8 @@ class Matrix extends MatrixBase {
    */
   public getRotation(): Quaternion {
     const res = [0, 0, 0, 0];
-    mat4.getRotation(res, this.rawElements);
+    const invScale = this.getScaling();
+    mat4.getRotation(res, this.multiplyWith(Matrix.scale(new Vector3(1/invScale.X,1/invScale.Y,1/invScale.Z))).rawElements);
     return new Quaternion(res);
   }
 
