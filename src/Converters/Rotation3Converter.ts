@@ -5,7 +5,7 @@ function Rotation3Converter(this: Attribute, val: any): any {
     if (val instanceof Quaternion) {
         return val;
     } else if (Array.isArray(val)) {
-        return new Quaternion([val[0], val[1], val[2], val[3]]);
+        return val.length === 4 ? new Quaternion([val[0], val[1], val[2], val[3]]) : Quaternion.euler(val[0],val[1],val[2]);
     } else if (typeof val === "string") {
         return Quaternion.parse(val);
     } else if(!!val && val[0] !== void 0 && val[1] !== void 0 && val[2] !== void 0 && val[3] !== void 0){
