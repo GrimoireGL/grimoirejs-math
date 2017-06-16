@@ -96,6 +96,12 @@ class Vector2 extends VectorBase {
     return Math.acos(Vector2.dot(v1.normalized, v2.normalized));
   }
 
+  public static lerp(v1: Vector2, v2: Vector2, t: number): Vector2 {
+    return new Vector2(VectorBase.__fromGenerationFunction(v1, v2, (i, v1_, v2_) => {
+      return v1_.rawElements[i] + (v2_.rawElements[i] - v1_.rawElements[i]) * t;
+    }));
+  }
+
   constructor(x: number, y: number);
   constructor(x: GLM.IArray);
   constructor(x: number | GLM.IArray, y?: number) {
