@@ -2,7 +2,7 @@ import Vector2 from "./Vector2";
 class Rectangle {
 
   private _left: number;
-  private _top: number;
+  private _bottom: number;
   private _width: number;
   private _height: number;
 
@@ -14,9 +14,9 @@ class Rectangle {
     return r1.Width === r2.Width && r1.Height === r2.Height;
   }
 
-  constructor(left: number, top: number, width: number, height: number) {
+  constructor(left: number, bottom: number, width: number, height: number) {
     this._left = left;
-    this._top = top;
+    this._bottom = bottom;
     this._width = width;
     this._height = height;
   }
@@ -30,11 +30,11 @@ class Rectangle {
   }
 
   public get Top(): number {
-    return this._top;
+    return this._bottom + this._height;
   }
 
   public get Bottom(): number {
-    return this._top + this._height;
+    return this._bottom;
   }
 
   public get Width(): number {
