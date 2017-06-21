@@ -107,6 +107,12 @@ class Vector3 extends VectorBase {
     return result;
   }
 
+  public static lerp(v1: Vector3,v2: Vector3, t: number): Vector3 {
+    return new Vector3(VectorBase.__fromGenerationFunction(v1, v2, (i, v1_, v2_) => {
+      return v1_.rawElements[i] + (v2_.rawElements[i] - v1_.rawElements[i]) * t;
+    }));
+  }
+
   constructor(x: number, y: number, z: number);
   constructor(x: GLM.IArray);
   constructor(x: number | GLM.IArray, y?: number, z?: number) {

@@ -159,3 +159,7 @@ test('a vector to string', (t) => {
 test('a vector to display string', (t) => {
   t.truthy((new Vector3(1, 1, 2)).toDisplayString() === 'Vector3(1, 1, 2)');
 });
+
+test('lerp vectors', (t) => {
+  t.truthy(Vector3.lerp(new Vector3(0, 0, 0), new Vector3(2, 4, 6), 0.5).equalWith(new Vector3(1, 2, 3)));
+});

@@ -105,6 +105,11 @@ class Vector4 extends VectorBase {
     }
     return result;
   }
+  public static lerp(v1: Vector4, v2: Vector4, t: number): Vector4 {
+    return new Vector4(VectorBase.__fromGenerationFunction(v1, v2, (i, v1_, v2_) => {
+      return v1_.rawElements[i] + (v2_.rawElements[i] - v1_.rawElements[i]) * t;
+    }));
+  }
 
   /*
    * Static properties
