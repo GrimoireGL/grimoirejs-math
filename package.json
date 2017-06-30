@@ -34,7 +34,7 @@
     "webpack-shell-plugin": "^0.5.0"
   },
   "peerDependencies": {
-    "grimoirejs": "^0.16.0"
+    "grimoirejs": "^0.17.0"
   },
   "repository": {
     "type": "git",
