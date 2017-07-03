@@ -97,6 +97,7 @@ class Quaternion {
     axisVec[0] = axis.X;
     axisVec[1] = axis.Y;
     axisVec[2] = axis.Z;
+    vec3.normalize(axisVec,axisVec);
     const newQuat = quat.create();
     return new Quaternion(quat.setAxisAngle(newQuat, axisVec, +angle));
   }
