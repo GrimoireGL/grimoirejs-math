@@ -74,7 +74,7 @@ class Rectangle {
       x = xOrPoint;
     }
     x -= this.Left;
-    y -= this.Top;
+    y -= this.Bottom;
     return xOrPoint instanceof Vector2 ? new Vector2(x, y) : [x, y];
   }
 
