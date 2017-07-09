@@ -14,7 +14,7 @@ export default class Angle2DParser {
     const result = regex.exec(input);
 
     if (result == null) {
-      throw new Error(`faild parse Angle string:'${input}'`);
+      return undefined;
     }
     let numerator = parseFloat(result[1]);
     if (result[2]) {
