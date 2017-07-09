@@ -45,14 +45,18 @@ class Quaternion {
     const reg3 = /^ *([^\(\),]+),([^\(\),]+),([^\(\),]+) *$/gm;
     const result = reg1.exec(input);
     if (result) {
+      const angle = Angle2DParser.parseAngle(result[2]);
+      if(angle === void 0){
+        return undefined;
+      }
       if (result[1] === "x") {
-        return Quaternion.angleAxis(Angle2DParser.parseAngle(result[2]), Vector3.XUnit);
+        return Quaternion.angleAxis(angle, Vector3.XUnit);
       }
       if (result[1] === "y") {
-        return Quaternion.angleAxis(Angle2DParser.parseAngle(result[2]), Vector3.YUnit);
+        return Quaternion.angleAxis(angle, Vector3.YUnit);
       }
       if (result[1] === "z") {
-        return Quaternion.angleAxis(Angle2DParser.parseAngle(result[2]), Vector3.ZUnit);
+        return Quaternion.angleAxis(angle, Vector3.ZUnit);
       }
     }
     const res2 = reg2.exec(input);
@@ -61,13 +65,21 @@ class Quaternion {
       let x = parseFloat(res2[2]);
       let y = parseFloat(res2[3]);
       let z = parseFloat(res2[4]);
+      if(rotation === undefined){
+        return undefined;
+      }
       return Quaternion.angleAxis(rotation, new Vector3(x, y, z));
     }
     const res3 = reg3.exec(input);
     if (res3) {
-      return Quaternion.euler(Angle2DParser.parseAngle(res3[1]), Angle2DParser.parseAngle(res3[2]), Angle2DParser.parseAngle(res3[3]));
+      const x = Angle2DParser.parseAngle(res3[1]);
+      const y = Angle2DParser.parseAngle(res3[2]);
+      const z = Angle2DParser.parseAngle(res3[3]);
+      if(x === undefined || y === undefined || z === undefined){
+        return undefined;
+      }
+      return Quaternion.euler(x, y, z);
     }
-    throw new Error(`Unknown format for rotation3D:'${input}'`);
   }
 
 
