@@ -9,14 +9,13 @@ import Color4Converter from "./Converters/Color4Converter";
 
 
 export default () => {
-  gr.registerConverter("Vector2",Vector2Converter);
-  gr.registerConverter("Vector3",Vector3Converter);
-  gr.registerConverter("Vector4",Vector4Converter);
-  gr.registerConverter("Color3",Color3Converter);
-  gr.registerConverter("Color4",Color4Converter);
-  gr.registerConverter("Rotation3",Rotation3Converter);
-  gr.registerConverter("Angle2D",Angle2DConverter);
-  gr.register(async ()=>{
-
+  gr.register(async () => {
+    gr.registerConverter("Vector2", Vector2Converter);
+    gr.registerConverter("Vector3", Vector3Converter);
+    gr.registerConverter("Vector4", Vector4Converter);
+    gr.registerConverter("Color3", Color3Converter);
+    gr.registerConverter("Color4", Color4Converter);
+    gr.registerConverter("Rotation3", Rotation3Converter);
+    gr.registerConverter("Angle2D", Angle2DConverter);
   });
 }
