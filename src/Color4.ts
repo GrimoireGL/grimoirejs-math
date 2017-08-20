@@ -72,9 +72,8 @@ class Color4 extends VectorBase {
     }
     n = color.match(/^\s*rgba\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\,\s*(0|1|0\.\d+)\s*\)\s*$/i);
     if (n && isFirst) {
-      let d = parseInt(n[4], 10);
-      d = d <= 1 ? d : d / 0xff;
-      return new Color4(parseInt(n[1], 10) / 0xff, parseInt(n[2], 10) / 0xff, parseInt(n[3], 10) / 0xff, parseInt(n[4], 10));
+      let d = parseFloat(n[4]);
+      return new Color4(parseInt(n[1], 10) / 0xff, parseInt(n[2], 10) / 0xff, parseInt(n[3], 10) / 0xff, d);
     }
     if (tryParse) {
       return undefined;
