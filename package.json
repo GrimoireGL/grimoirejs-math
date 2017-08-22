@@ -53,5 +53,6 @@
   "license": "MIT",
   "release": {
     "verifyConditions": "condition-circle"
-  }
+  },
+  "api-reference":"https://api.grimoire.gl/grimoirejs-math"
 }
