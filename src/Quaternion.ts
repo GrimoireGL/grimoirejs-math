@@ -140,9 +140,20 @@ class Quaternion {
     return 2 * Math.acos(delta.W);
   }
 
-  public static fromToRotation(from: Vector3, to: Vector3): Quaternion {
-    const crossed = Vector3.cross(from.normalized, to.normalized);
-    const angle = Vector3.dot(from.normalized, to.normalized);
+  /**
+   * Returns a quaternion that transform provided 'from' vector into 'to' vector.
+   * If 'from' cross 'to' is closer to 0 vector, axisHint is used as axis.
+   * This may only used for the situation when from vector and to vector is in relations these are negating the other.
+   * @param from 
+   * @param to 
+   * @param axisHint if no vector specified to this argument, [0,1,0] will be used for default
+   */
+  public static fromToRotation(from: Vector3, to: Vector3,axisHint:Vector3 = null): Quaternion {
+    let crossed = Vector3.cross(from.normalized, to.normalized);
+    if(crossed.magnitude < 0.5){ // If crossed vector magnitude is less than 1, that is from.to is 1 or -1
+      crossed = axisHint?axisHint:new Vector3(0,1,0);
+    }
+    const angle = Math.acos(Vector3.dot(from.normalized, to.normalized));
     return Quaternion.angleAxis(angle, crossed);
   }
 
