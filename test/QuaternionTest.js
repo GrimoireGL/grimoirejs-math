@@ -18,20 +18,9 @@ test('multiply', (t) => {
   new Quaternion([10, 10, 10, 10])), new Quaternion([200, 200, 200, -200])));
 });
 
-test('angleAxis', (t) => {
-  t.pass();
-});
 
 test('euler', (t) => {
   t.truthy(Quaternion.equals(Quaternion.euler(0, 0, 0), new Quaternion([0, 0, 0, 1])));
-});
-
-test('eulerXYZ', (t) => {
-  t.pass();
-});
-
-test('Slerp', (t) => {
-  t.pass();
 });
 
 test('Angle', (t) => {
@@ -39,11 +28,12 @@ test('Angle', (t) => {
 });
 
 test('FromToRotation', (t) => {
-  t.pass();
-});
-
-test('LookRotation', (t) => {
-  t.pass();
+  let difference = Quaternion.angle(Quaternion.Identity,Quaternion.fromToRotation(new Vector3(0,0,1),new Vector3(0,0,1)));
+  t.truthy(difference === 0);
+  difference = Quaternion.angle(Quaternion.Identity,Quaternion.fromToRotation(new Vector3(0,0,1),new Vector3(1,0,0)));  
+  t.truthy(Math.abs(difference-Math.PI / 2) < 0.0001);
+  difference = Quaternion.angle(Quaternion.Identity,Quaternion.fromToRotation(new Vector3(0,0,-1),new Vector3(0,0,1)));  
+  t.truthy(Math.abs(difference-Math.PI) < 0.0001);
 });
 
 test('identity', (t) => {
