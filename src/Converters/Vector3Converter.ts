@@ -1,5 +1,5 @@
 import gr from "grimoirejs";
-import Attribute from "grimoirejs/ref/Node/Attribute";
+import Attribute from "grimoirejs/ref/Core/Attribute";
 import Vector3 from "../Vector3";
 
 function Vector3Converter(this: Attribute, val: any): any {

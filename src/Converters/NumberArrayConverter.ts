@@ -1,4 +1,4 @@
-import Attribute from "grimoirejs/ref/Node/Attribute";
+import Attribute from "grimoirejs/ref/Core/Attribute";
 function NumberArrayConverter(this: Attribute, val: any): any {
     if(typeof val === "string"){
         return new Float32Array(val.split(",").map(f=>parseFloat(f)));

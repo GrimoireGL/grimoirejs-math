@@ -1,5 +1,5 @@
 import gr from "grimoirejs";
-import Attribute from "grimoirejs/ref/Node/Attribute";
+import Attribute from "grimoirejs/ref/Core/Attribute";
 import Vector2 from "../Vector2";
 function Vector2Converter(this: Attribute, val: any): any {
   if (val instanceof Vector2) {

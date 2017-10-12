@@ -1,5 +1,5 @@
 import gr from "grimoirejs";
-import Attribute from "grimoirejs/ref/Node/Attribute";
+import Attribute from "grimoirejs/ref/Core/Attribute";
 import Color3 from "../Color3";
 import Color4 from "../Color4";
 function Color3Converter(this: Attribute, val: any): any {
