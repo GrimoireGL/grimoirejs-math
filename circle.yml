@@ -1,3 +1,6 @@
+machine:
+  node:
+    version: 9.3.0
 test:
   post:
     - sh release.sh
