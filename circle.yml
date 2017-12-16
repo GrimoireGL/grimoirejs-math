@@ -1,29 +1,18 @@
-machine:
-  node:
-    version: 6.9.5
-
-  post:
-    - curl -o- -L https://yarnpkg.com/install.sh | bash
-
-dependencies:
-  cache_directories:
-    - "~/.cache/yarn"
-
-  pre:
-    - yarn --version
-
-  override:
-    - yarn install
-
 test:
   post:
     - sh release.sh
   override:
     - npm run build && npm test
-
+    - sh ./common/e2e.sh
+checkout:
+  post:
+    - git submodule init
+    - git submodule update
 deployment:
   deploy:
     branch: master
     commands:
       - npm run doc
-      - aws s3 cp ./docs/ s3://api.grimoire.gl/$CIRCLE_PROJECT_REPONAME --recursive --acl public-read
+      - >-
+        aws s3 cp ./docs/ s3://api.grimoire.gl/$CIRCLE_PROJECT_REPONAME
+        --recursive --acl public-read

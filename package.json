@@ -48,11 +48,11 @@
     "generate-expose": "cauldron generate-exposure --src ./src --dest ./src/index.ts --ts --main ./src/main.ts --dts ./ref",
     "generate-reference": "cauldron generate-reference --src ./src --dest ./src/index.ts --ts --main ./src/main.ts --dts ./ref",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
-    "doc": "node ./doc-timestamp.js && typedoc --out ./docs/ --options typedoc.json  ./tsconfig.json"
+    "doc": "node ./common/doc-timestamp.js && typedoc --out ./docs/ --options ./common/typedoc.json  ./tsconfig.json"
   },
   "license": "MIT",
   "release": {
     "verifyConditions": "condition-circle"
   },
-  "api-reference":"https://api.grimoire.gl/grimoirejs-math"
+  "api-reference": "https://api.grimoire.gl/grimoirejs-math"
 }
