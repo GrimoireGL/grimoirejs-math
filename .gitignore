@@ -115,3 +115,4 @@ register
 yarn.lock
 src/index.ts
 docs
+package-lock.json

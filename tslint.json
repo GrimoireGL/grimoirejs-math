@@ -1,8 +1,0 @@
-{
-  "extends": "./common/tslint.json",
-  "rulesDirectory": [],
-  "rules": {
-    "no-unused-variable": false,
-    "match-default-export-name": false
-  }
-}
