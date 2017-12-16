@@ -3,7 +3,7 @@
  */
 
 // build version
-export const __VERSION__ = "1.14.0-beta1";
+export const __VERSION__ = "2.0.0";
 
 // full package name
 export const __NAME__ = "grimoirejs-math";
