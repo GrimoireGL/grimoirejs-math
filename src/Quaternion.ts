@@ -1,9 +1,8 @@
-///<reference path="./gl-matrix.d.ts"/>
-
 import Vector3 from "./Vector3";
-import {GLM, vec3, quat} from "gl-matrix";
+import { vec3, quat } from "gl-matrix";
 import Matrix from "./Matrix";
 import Angle2DParser from "./Util/Angle2DParser";
+import { Undef } from "grimoirejs/ref/Tool/Types";
 
 /**
 * The class to maniplate quaternion.
@@ -14,9 +13,9 @@ import Angle2DParser from "./Util/Angle2DParser";
 * (w;x,y,z) means w*1+x*i+y*j+z*k
 *
 */
-class Quaternion {
+export default class Quaternion {
 
-  public rawElements: GLM.IArray;
+  public rawElements: quat;
 
   public static equals(q1: Quaternion, q2: Quaternion): boolean {
     for (let i = 0; i < 4; i++) {
@@ -39,14 +38,14 @@ class Quaternion {
    * @param input the string to be parsed as angle in 3D.
    * @returns {Quaternion} parsed rotation in Quaternion.
    */
-  public static parse(input: string): Quaternion {
+  public static parse(input: string): Undef<Quaternion> {
     const reg1 = /^ *(x|y|z) *\(([^\(\)]+)\) *$/gm;
     const reg2 = /^ *axis *\(([^\(\),]+),([^\(\),]+),([^\(\),]+),([^\(\),]+)\) *$/gm;
     const reg3 = /^ *([^\(\),]+),([^\(\),]+),([^\(\),]+) *$/gm;
     const result = reg1.exec(input);
     if (result) {
       const angle = Angle2DParser.parseAngle(result[2]);
-      if(angle === void 0){
+      if (angle === void 0) {
         return undefined;
       }
       if (result[1] === "x") {
@@ -65,7 +64,7 @@ class Quaternion {
       let x = parseFloat(res2[2]);
       let y = parseFloat(res2[3]);
       let z = parseFloat(res2[4]);
-      if(rotation === undefined){
+      if (rotation === undefined) {
         return undefined;
       }
       return Quaternion.angleAxis(rotation, new Vector3(x, y, z));
@@ -75,11 +74,12 @@ class Quaternion {
       const x = Angle2DParser.parseAngle(res3[1]);
       const y = Angle2DParser.parseAngle(res3[2]);
       const z = Angle2DParser.parseAngle(res3[3]);
-      if(x === undefined || y === undefined || z === undefined){
+      if (x === undefined || y === undefined || z === undefined) {
         return undefined;
       }
       return Quaternion.euler(x, y, z);
     }
+    return undefined;
   }
 
 
@@ -89,8 +89,9 @@ class Quaternion {
   */
   public static add(q1: Quaternion, q2: Quaternion): Quaternion {
     const newQuat = quat.create();
+    quat.add(newQuat, q1.rawElements, q2.rawElements)
 
-    return new Quaternion(quat.add(newQuat, q1.rawElements, q2.rawElements));
+    return new Quaternion(newQuat[0], newQuat[1], newQuat[2], newQuat[3]);
   }
 
   /**
@@ -98,7 +99,8 @@ class Quaternion {
   */
   public static multiply(q1: Quaternion, q2: Quaternion): Quaternion {
     const newQuat = quat.create();
-    return new Quaternion(quat.mul(newQuat, q1.rawElements, q2.rawElements));
+    quat.mul(newQuat, q1.rawElements, q2.rawElements)
+    return new Quaternion(newQuat[0], newQuat[1], newQuat[2], newQuat[3]);
   }
 
   /**
@@ -109,9 +111,10 @@ class Quaternion {
     axisVec[0] = axis.X;
     axisVec[1] = axis.Y;
     axisVec[2] = axis.Z;
-    vec3.normalize(axisVec,axisVec);
+    vec3.normalize(axisVec, axisVec);
     const newQuat = quat.create();
-    return new Quaternion(quat.setAxisAngle(newQuat, axisVec, +angle));
+    quat.setAxisAngle(newQuat, axisVec, +angle)
+    return new Quaternion(newQuat[0], newQuat[1], newQuat[2], newQuat[3]);
   }
 
   public static euler(x: number, y: number, z: number): Quaternion {
@@ -125,7 +128,8 @@ class Quaternion {
 
   public static slerp(q1: Quaternion, q2: Quaternion, t: number): Quaternion {
     const newQuat = quat.create();
-    return new Quaternion(quat.slerp(newQuat, q1.rawElements, q2.rawElements, +t));
+    quat.slerp(newQuat, q1.rawElements, q2.rawElements, +t)
+    return new Quaternion(newQuat[0], newQuat[1], newQuat[2], newQuat[3]);
   }
 
   /**
@@ -148,10 +152,10 @@ class Quaternion {
    * @param to 
    * @param axisHint if no vector specified to this argument, [0,1,0] will be used for default
    */
-  public static fromToRotation(from: Vector3, to: Vector3,axisHint:Vector3 = null): Quaternion {
+  public static fromToRotation(from: Vector3, to: Vector3, axisHint?: Vector3): Quaternion {
     let crossed = Vector3.cross(from.normalized, to.normalized);
-    if(crossed.magnitude < 0.5){ // If crossed vector magnitude is less than 1, that is from.to is 1 or -1
-      crossed = axisHint?axisHint:new Vector3(0,1,0);
+    if (crossed.magnitude < 0.5) { // If crossed vector magnitude is less than 1, that is from.to is 1 or -1
+      crossed = axisHint ? axisHint : new Vector3(0, 1, 0);
     }
     const angle = Math.acos(Vector3.dot(from.normalized, to.normalized));
     return Quaternion.angleAxis(angle, crossed);
@@ -176,29 +180,29 @@ class Quaternion {
 
     if (num8 > 0) {
       const num = Math.sqrt(1 + num8);
-      return new Quaternion([(m12 - m21) * 0.5 / num, (m20 - m02) * 0.5 / num, (m01 - m10) * 0.5 / num, num / 2]);
+      return new Quaternion((m12 - m21) * 0.5 / num, (m20 - m02) * 0.5 / num, (m01 - m10) * 0.5 / num, num / 2);
     }
     if (m00 >= m11 && m00 >= m22) {
       const num7 = Math.sqrt(1 + m00 - m11 - m22);
-      return new Quaternion([(m01 + m10) * 0.5 / num7, (m02 + m20) * 0.5 / num7, (m12 - m21) * 0.5 / num7, num7 / 2]);
+      return new Quaternion((m01 + m10) * 0.5 / num7, (m02 + m20) * 0.5 / num7, (m12 - m21) * 0.5 / num7, num7 / 2);
     }
     if (m11 > m22) {
       const num6 = Math.sqrt(1 + m11 - m00 - m22);
-      return new Quaternion([(m10 + m01) * 0.5 / num6, 0.5 * num6, (m21 + m12) * 0.5 / num6, (m20 - m02) * 0.5 / num6]);
+      return new Quaternion((m10 + m01) * 0.5 / num6, 0.5 * num6, (m21 + m12) * 0.5 / num6, (m20 - m02) * 0.5 / num6);
     }
     const num5 = Math.sqrt(1 + m22 - m00 - m11);
-    return new Quaternion([(m20 + m02) * 0.5 / num5, (m21 + m12) * 0.5 / num5, 0.5 * num5, (m01 - m10) * 0.5 / num5]);
+    return new Quaternion((m20 + m02) * 0.5 / num5, (m21 + m12) * 0.5 / num5, 0.5 * num5, (m01 - m10) * 0.5 / num5);
   }
 
   public static get Identity(): Quaternion {
-    return new Quaternion(quat.create());
+    return new Quaternion(0, 0, 0, 1);
   }
 
   /**
   * Constructor by specifing each elements.
   */
-  constructor(rawElements: GLM.IArray) {
-    this.rawElements = rawElements;
+  constructor(x: number, y: number, z: number, w: number) {
+    this.rawElements = quat.fromValues(x, y, z, w);
   }
 
   public get eularAngles() {
@@ -251,7 +255,8 @@ class Quaternion {
   */
   public get Conjugate(): Quaternion {
     const newQuat = quat.create();
-    return new Quaternion(quat.conjugate(newQuat, this.rawElements));
+    quat.conjugate(newQuat, this.rawElements)
+    return new Quaternion(newQuat[0], newQuat[1], newQuat[2], newQuat[3]);
   }
 
   /**
@@ -270,13 +275,15 @@ class Quaternion {
   */
   public normalize(): Quaternion {
     const newQuat = quat.create();
-    return new Quaternion(quat.normalize(newQuat, this.rawElements));
+    quat.normalize(newQuat, this.rawElements)
+    return new Quaternion(newQuat[0], newQuat[1], newQuat[2], newQuat[3]);
   }
 
 
   public inverse(): Quaternion {
     const newQuat = quat.create();
-    return new Quaternion(quat.invert(newQuat, this.rawElements));
+    quat.invert(newQuat, this.rawElements)
+    return new Quaternion(newQuat[0], newQuat[1], newQuat[2], newQuat[3]);
   }
 
   public toAngleAxisString(): string {
@@ -328,5 +335,3 @@ class Quaternion {
     return result;
   }
 }
-
-export default Quaternion;

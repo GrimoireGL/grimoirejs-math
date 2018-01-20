@@ -6,17 +6,15 @@ import Rotation3Converter from "./Converters/Rotation3Converter";
 import Angle2DConverter from "./Converters/Angle2DConverter";
 import Color3Converter from "./Converters/Color3Converter";
 import Color4Converter from "./Converters/Color4Converter";
-// import NumberArrayConverter from "./Converters/NumberArrayConverter";
 
 export default () => {
   gr.register(async () => {
-    gr.registerConverter("Vector2", Vector2Converter);
-    gr.registerConverter("Vector3", Vector3Converter);
-    gr.registerConverter("Vector4", Vector4Converter);
-    gr.registerConverter("Color3", Color3Converter);
-    gr.registerConverter("Color4", Color4Converter);
-    gr.registerConverter("Rotation3", Rotation3Converter);
-    gr.registerConverter("Angle2D", Angle2DConverter);
-    //gr.registerConverter("NumberArray",NumberArrayConverter);
+    gr.registerConverter(Vector2Converter);
+    gr.registerConverter(Vector3Converter);
+    gr.registerConverter(Vector4Converter);
+    gr.registerConverter(Color3Converter);
+    gr.registerConverter(Color4Converter);
+    gr.registerConverter(Rotation3Converter);
+    gr.registerConverter(Angle2DConverter);
   });
 }

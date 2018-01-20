@@ -1,6 +1,6 @@
 {
   "name": "grimoirejs-math",
-  "version": "2.0.6-beta",
+  "version": "2.1.0-beta",
   "description": "The basement library for math of grimoire.js",
   "main": "./ref/index.js",
   "typings": "./ref/index.d.ts",
@@ -14,9 +14,10 @@
     "grimoire"
   ],
   "dependencies": {
-    "gl-matrix": "https://github.com/GrimoireGL/gl-matrix.git"
+    "gl-matrix": "git+https://github.com/GrimoireGL/gl-matrix.git"
   },
   "devDependencies": {
+    "@types/gl-matrix": "^2.4.0",
     "ava": "^0.22.0",
     "babel-cli": "^6.26.0",
     "babel-loader": "^7.1.2",
@@ -24,13 +25,13 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "condition-circle": "^1.5.0",
-    "grimoirejs": "beta",
-    "grimoirejs-cauldron": "beta",
+    "grimoirejs": "^1.0.9-beta17",
+    "grimoirejs-cauldron": "^4.1.5-beta2",
     "semantic-release": "^7.0.2",
     "ts-loader": "^2.3.3",
     "tslint": "^5.7.0",
     "typedoc": "^0.8.0",
-    "typescript": "^2.4.2",
+    "typescript": "^2.6.2",
     "webpack": "^3.5.5",
     "webpack-shell-plugin": "^0.5.0"
   },

@@ -1,3 +1,4 @@
+
 /**
  * Utility class to parse the arguments of attributes.
  */
@@ -9,7 +10,7 @@ export default class Angle2DParser {
    * @param input the string to parse.
    * @returns {number} parsed angle in radians.
    */
-  public static parseAngle(input: string): number {
+  public static parseAngle(input: string): number | undefined {
     const regex = /^ *(-?[\de+-.]*) *(?:\/ *([\de+-.]*))? *(p|prad|deg|d|r|rad)? *$/gm;
     const result = regex.exec(input);
 

@@ -1,20 +1,20 @@
-///<reference path="./gl-matrix.d.ts"/>
+
 
 import MatrixBase from "./MatrixBase";
 import Vector3 from "./Vector3";
 import Vector4 from "./Vector4";
 import Quaternion from "./Quaternion";
-import {GLM, mat4, vec3, vec4, quat} from "gl-matrix";
+import { mat4, vec3, vec4, quat } from "gl-matrix";
 /**
  * Represents 4x4 matrix.
  */
-class Matrix extends MatrixBase {
+export default class Matrix extends MatrixBase<mat4> {
 
   /**
    * Instanciate zero matrix.
    */
   public static zero(): Matrix {
-    return new Matrix([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+    return new Matrix(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   }
 
   /**
@@ -28,8 +28,8 @@ class Matrix extends MatrixBase {
    * Instanciate matrix in row major.
    * @return {Matrix}     [description]
    */
-  public static fromElements(m00:number, m01:number, m02:number, m03:number, m10:number, m11:number, m12:number, m13:number, m20:number, m21:number, m22:number, m23:number, m30:number, m31:number, m32:number, m33:number): Matrix {
-    return new Matrix([m00, m10, m20, m30, m01, m11, m21, m31, m02, m12, m22, m32, m03, m13, m23, m33]);
+  public static fromElements(m00: number, m01: number, m02: number, m03: number, m10: number, m11: number, m12: number, m13: number, m20: number, m21: number, m22: number, m23: number, m30: number, m31: number, m32: number, m33: number): Matrix {
+    return new Matrix(m00, m10, m20, m30, m01, m11, m21, m31, m02, m12, m22, m32, m03, m13, m23, m33);
   }
 
   /**
@@ -38,7 +38,7 @@ class Matrix extends MatrixBase {
    * @return {[type]}   A matrix instance.
    */
   public static fromFunc(f: (w: number, h: number) => number): Matrix {
-    return new Matrix([f(0, 0), f(1, 0), f(2, 0), f(3, 0), f(0, 1), f(1, 1), f(2, 1), f(3, 1), f(0, 2), f(1, 2), f(2, 2), f(3, 2), f(0, 3), f(1, 3), f(2, 3), f(3, 3)]);
+    return new Matrix(f(0, 0), f(1, 0), f(2, 0), f(3, 0), f(0, 1), f(1, 1), f(2, 1), f(3, 1), f(0, 2), f(1, 2), f(2, 2), f(3, 2), f(0, 3), f(1, 3), f(2, 3), f(3, 3));
   }
 
   /**
@@ -62,7 +62,7 @@ class Matrix extends MatrixBase {
     for (let i = 0; i < 16; i++) {
       mat[i] = m1.rawElements[i] + m2.rawElements[i];
     }
-    return new Matrix(mat);
+    return new Matrix(mat4.add(mat, m1.rawElements, m2.rawElements));
   }
 
   /**
@@ -72,7 +72,8 @@ class Matrix extends MatrixBase {
    * @return {Matrix}    The result of calculation.
    */
   public static subtract(m1: Matrix, m2: Matrix): Matrix {
-    return Matrix.add(m1, Matrix.negate(m2));
+    const mat = mat4.create();
+    return new Matrix(mat4.subtract(mat, m1.rawElements, m2.rawElements));
   }
 
   /**
@@ -83,8 +84,7 @@ class Matrix extends MatrixBase {
    */
   public static scalarMultiply(s: number, m: Matrix): Matrix {
     const newMat = mat4.create();
-    mat4.multiply(newMat, [s, 0, 0, 0, 0, s, 0, 0, 0, 0, s, 0, 0, 0, 0, s], m.rawElements);
-    return new Matrix(newMat);
+    return new Matrix(mat4.multiplyScalar(newMat, m.rawElements, s));
   }
 
   /**
@@ -176,9 +176,13 @@ class Matrix extends MatrixBase {
   /**
    * Compute inverted passed matrix.
    */
-  public static inverse(m: Matrix): Matrix {
+  public static inverse(m: Matrix): Matrix | null {
     const newMat = mat4.create();
-    return new Matrix(mat4.invert(newMat, m.rawElements));
+    const mat = mat4.invert(newMat, m.rawElements)
+    if (!mat) {
+      return null;
+    }
+    return new Matrix(mat);
   }
 
   /**
@@ -308,12 +312,16 @@ class Matrix extends MatrixBase {
    * Constructor to generate an instance
    * @param  {GLM.IArray} arr Array of components
    */
-  constructor(arr?: GLM.IArray) {
+  constructor(arr?: mat4)
+  constructor(m00: number, m01: number, m02: number, m03: number, m10: number, m11: number, m12: number, m13: number, m20: number, m21: number, m22: number, m23: number, m30: number, m31: number, m32: number, m33: number);
+  constructor(m00?: number | mat4, m01?: number, m02?: number, m03?: number, m10?: number, m11?: number, m12?: number, m13?: number, m20?: number, m21?: number, m22?: number, m23?: number, m30?: number, m31?: number, m32?: number, m33?: number) {
     super();
-    if (arr) {
-      this.rawElements = arr;
-    } else {
+    if (m00 === undefined) {
       this.rawElements = mat4.create();
+    } else if (m01 === undefined) {
+      this.rawElements = m00 as mat4;
+    } else {
+      this.rawElements = mat4.fromValues(m00 as number, m01!, m02!, m03!, m10!, m11!, m12!, m13!, m20!, m21!, m22!, m23!, m30!, m31!, m32!, m33!);
     }
   }
 
@@ -387,7 +395,7 @@ class Matrix extends MatrixBase {
    * @return {Vector3} Translation represented in vector
    */
   public getTranslation(): Vector3 {
-    const res = [0, 0, 0];
+    const res = vec3.create();
     mat4.getTranslation(res, this.rawElements);
     return new Vector3(res);
   }
@@ -397,9 +405,7 @@ class Matrix extends MatrixBase {
    * @return {Vector3} Scaling represented in vector
    */
   public getScaling(): Vector3 {
-    const res = [0, 0, 0];
-    mat4.getScaling(res, this.rawElements);
-    return new Vector3(res);
+    return new Vector3(mat4.getScaling(vec3.create(), this.rawElements));
   }
 
   /**
@@ -407,10 +413,10 @@ class Matrix extends MatrixBase {
    * @return {Quaternion} Rotation represented in quaternion
    */
   public getRotation(): Quaternion {
-    const res = [0, 0, 0, 0];
+    const res = quat.fromValues(0, 0, 0, 1);
     const invScale = this.getScaling();
-    mat4.getRotation(res, this.multiplyWith(Matrix.scale(new Vector3(1/invScale.X,1/invScale.Y,1/invScale.Z))).rawElements);
-    return new Quaternion(res);
+    mat4.getRotation(res, this.multiplyWith(Matrix.scale(new Vector3(1 / invScale.X, 1 / invScale.Y, 1 / invScale.Z))).rawElements);
+    return new Quaternion(res[0], res[1], res[2], res[3]);
   }
 
   /**
@@ -427,17 +433,16 @@ class Matrix extends MatrixBase {
    * Element count of this matrix. Must be 16.
    * @return {number} [description]
    */
-  public get ElementCount(): number { return 16; }
+  public get ElementCount(): 16 { return 16; }
 
   /**
    * Row count of this matrix. Must be 4.
    */
-  public get RowCount(): number { return 4; }
+  public get RowCount(): 4 { return 4; }
 
   /**
    * Column count of this matrix. Must be 4.
    */
-  public get ColmunCount(): number { return 4; }
-
+  public get ColmunCount(): 4 { return 4; }
 }
-export default Matrix;
+

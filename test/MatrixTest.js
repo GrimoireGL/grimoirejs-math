@@ -101,8 +101,8 @@ test('determinant', (t) => {
 
 test('inverse', (t) => {
   t.truthy(Matrix.equals(
-    Matrix.inverse(new Matrix([1, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 4])),
-    new Matrix([1, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0.25])));
+    Matrix.inverse(new Matrix(1, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 4)),
+    new Matrix(1, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0.25)));
 });
 
 test('translate', (t) => {

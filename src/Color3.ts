@@ -1,15 +1,15 @@
-///<reference path="./gl-matrix.d.ts"/>
-
 import VectorBase from "./VectorBase";
 import Vector3 from "./Vector3";
 import Color4 from "./Color4";
 import Vector4 from "./Vector4";
 import Colors from "./Colors";
+import { Undef } from "grimoirejs/ref/Tool/Types";
+import { vec3 } from "gl-matrix";
 
 /**
  * Represents 3-component color without alpha.
  */
-class Color3 extends VectorBase {
+export default class Color3 extends VectorBase<vec3> {
 
   /**
    * Convert Color4 to Color3.
@@ -25,7 +25,7 @@ class Color3 extends VectorBase {
    * @param  {boolean} tryParse Internal use. Please use undefined always.
    * @return {Color3}           Converted Color3 value
    */
-  public static parse(color: string, tryParse?: boolean): Color3 {
+  public static parse(color: string, tryParse?: boolean): Undef<Color3> {
     return Color3.internalParse(color, true, tryParse);
   }
 
@@ -37,9 +37,9 @@ class Color3 extends VectorBase {
    * @param  {boolean} tryParse [description]
    * @return {Color3}           [description]
    */
-  public static internalParse(color: string, isFirst: boolean, tryParse?: boolean): Color3 {
-    if (isFirst && Colors[color]) {
-      const col = Color4.internalParse(Colors[color], false, tryParse);
+  public static internalParse(color: string, isFirst: boolean, tryParse?: boolean): Undef<Color3> {
+    if (isFirst && (Colors as any)[color]) {
+      const col = Color4.internalParse((Colors as any)[color], false, tryParse)!;
       return Color3.fromColor4(col);
     }
     let m;
@@ -95,7 +95,7 @@ class Color3 extends VectorBase {
    */
   constructor(r: number, g: number, b: number) {
     super();
-    this.rawElements = [r, g, b];
+    this.rawElements = vec3.fromValues(r, g, b);
   }
 
   /**
@@ -174,6 +174,3 @@ class Color3 extends VectorBase {
     return `Color3(${this.R}, ${this.G}, ${this.B}, ${st})`;
   }
 }
-
-
-export default Color3;

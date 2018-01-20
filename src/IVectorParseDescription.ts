@@ -1,7 +1,6 @@
-interface IVectorParseDescription {
+export default interface IVectorParseDescription {
   needNormalize: boolean;
   needNegate: boolean;
-  coefficient: number;
+  coefficient?: number;
   elements: number[];
 }
-export default IVectorParseDescription;

@@ -1,8 +1,9 @@
-///<reference path="./gl-matrix.d.ts"/>
+
 
 import VectorBase from "./VectorBase";
-import {GLM, vec2} from "gl-matrix";
-class Vector2 extends VectorBase {
+import { vec2 } from "gl-matrix";
+import { Undef } from "grimoirejs/ref/Tool/Types";
+export default class Vector2 extends VectorBase<vec2> {
 
   public static get XUnit(): Vector2 {
     return new Vector2(1, 0);
@@ -24,7 +25,7 @@ class Vector2 extends VectorBase {
     return new Vector2(vec.X, vec.Y);
   }
 
-  public static parse(str: string): Vector2 {
+  public static parse(str: string): Undef<Vector2> {
     const parseResult = VectorBase.__parse(str);
     const elements = parseResult.elements;
     if (elements.length !== 1 && elements.length !== 2) {
@@ -85,11 +86,13 @@ class Vector2 extends VectorBase {
   }
 
   public static min(v1: Vector2, v2: Vector2): Vector2 {
-    return new Vector2(VectorBase.__fromGenerationFunction(v1, v2, (i, v1_, v2_) => Math.min(v1_.rawElements[i], v2_.rawElements[i])));
+    const newVec = vec2.create();
+    return new Vector2(vec2.min(newVec, v1.rawElements, v2.rawElements));
   }
 
   public static max(v1: Vector2, v2: Vector2): Vector2 {
-    return new Vector2(VectorBase.__fromGenerationFunction(v1, v2, (i, v1_, v2_) => Math.max(v1_.rawElements[i], v2_.rawElements[i])));
+    const newVec = vec2.create();
+    return new Vector2(vec2.max(newVec, v1.rawElements, v2.rawElements));
   }
 
   public static angle(v1: Vector2, v2: Vector2): number {
@@ -97,20 +100,19 @@ class Vector2 extends VectorBase {
   }
 
   public static lerp(v1: Vector2, v2: Vector2, t: number): Vector2 {
-    return new Vector2(VectorBase.__fromGenerationFunction(v1, v2, (i, v1_, v2_) => {
-      return v1_.rawElements[i] + (v2_.rawElements[i] - v1_.rawElements[i]) * t;
-    }));
+    const newVec = vec2.create();
+    return new Vector2(vec2.lerp(newVec, v1.rawElements, v2.rawElements, t));
   }
 
   constructor(x: number, y: number);
-  constructor(x: GLM.IArray);
-  constructor(x: number | GLM.IArray, y?: number) {
+  constructor(x: vec2);
+  constructor(x: number | vec2, y?: number) {
     super();
-    if (typeof y === "undefined") {
-      this.rawElements = <GLM.IArray>x;
+    if (y === undefined) {
+      this.rawElements = x as vec2;
       return;
     }
-    this.rawElements = [<number>x, y];
+    this.rawElements = vec2.fromValues(x as number, y);
   }
 
   public get normalized() {
@@ -173,7 +175,7 @@ class Vector2 extends VectorBase {
     return `Vector2${this.toString()}`;
   }
 
-  public get ElementCount(): number { return 2; }
+  public get ElementCount(): 2 { return 2; }
 }
 
-export default Vector2;
+
