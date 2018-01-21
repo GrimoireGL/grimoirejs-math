@@ -1,5 +1,5 @@
 import test from 'ava';
-import Color4 from '../lib-es5/Color4';
+import Color4 from '../src/Color4';
 
 test('parse is correct', (t) => {
   t.truthy(!!Color4.parse("green", true));

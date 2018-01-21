@@ -1,5 +1,5 @@
 import test from 'ava';
-import Color3 from '../lib-es5/Color3';
+import Color3 from '../src/Color3';
 
 test('parse is correct', (t) => {
 

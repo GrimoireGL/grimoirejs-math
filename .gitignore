@@ -117,3 +117,4 @@ src/index.ts
 src/metaInfo.ts
 docs
 package-lock.json
+test-lib

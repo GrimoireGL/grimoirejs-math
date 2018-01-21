@@ -1,8 +1,8 @@
 import test from 'ava';
 
-import Quaternion from '../lib-es5/Quaternion';
-import Vector3 from '../lib-es5/Vector3';
-import Matrix from '../lib-es5/Matrix';
+import Quaternion from '../src/Quaternion';
+import Vector3 from '../src/Vector3';
+import Matrix from '../src/Matrix';
 
 test('equals', (t) => {
   t.truthy(Quaternion.equals(Quaternion.euler(10, 20, 30), Quaternion.euler(10, 20, 30)));
@@ -58,7 +58,7 @@ test('get W', (t) => {
 
 test('get ImaginaryPart', (t) => {
   t.truthy(Vector3.equals(new Quaternion(10, 20, 20, 10).ImaginaryPart,
-    new Vector3([10, 20, 20])));
+    new Vector3(10, 20, 20)));
 });
 
 test('get Conjugate', (t) => {
