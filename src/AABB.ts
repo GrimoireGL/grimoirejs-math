@@ -9,7 +9,7 @@ export default class AABB {
 
   constructor(initialPoints?: Vector3[]) {
     if (initialPoints) {
-      initialPoints.forEach(this.expand);
+      initialPoints.forEach((p) => this.expand(p));
     }
   }
   /**
