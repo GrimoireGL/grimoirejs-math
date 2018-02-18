@@ -16,19 +16,19 @@ export default class AABB {
    * AABB's vertex in most left,most bottom,most far.
    * @type {Vector3}
    */
-  public pointLBF: Vector3;
+  public pointLBF!: Vector3;
 
   /**
   * AABB's vertex in most right,most top,most near.
   * @type {Vector3}
   */
-  public pointRTN: Vector3;
+  public pointRTN!: Vector3;
 
   /**
    * Center of this AABB
    * @type {Vector3}
    */
-  private _center: Nullable<Vector3>;
+  private _center!: Nullable<Vector3>;
 
   /**
    * Width of this AABB

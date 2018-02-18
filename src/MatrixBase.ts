@@ -1,7 +1,7 @@
 
 export default abstract class MatrixBase<T extends Float32Array> {
 
-  public rawElements: T;
+  public rawElements!: T;
 
   protected static __elementEquals<T extends Float32Array>(m1: MatrixBase<T>, m2: MatrixBase<T>): boolean {
     if (m1.RowCount !== m2.RowCount || m1.ColmunCount !== m2.ColmunCount) {

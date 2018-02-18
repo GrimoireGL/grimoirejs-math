@@ -7,7 +7,7 @@ export default abstract class VectorBase<T extends Float32Array> {
   /**
    * Actual array represents components of this instance.
    */
-  public rawElements: T;
+  public rawElements!: T;
   private _magnitudeSquaredCache = -1;
   private _magnitudeCache = -1;
 
