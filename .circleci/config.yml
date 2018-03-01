@@ -7,6 +7,8 @@ jobs:
       TZ: /usr/share/zoneinfo/UTC
     steps:
       - checkout
+      - run: git submodule sync
+      - run: git submodule update --init
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run: sudo apt update && sudo apt install python-pip python-dev
@@ -39,6 +41,8 @@ jobs:
       TZ: /usr/share/zoneinfo/UTC
     steps:
       - checkout
+      - run: git submodule sync
+      - run: git submodule update --init
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - restore_cache:
@@ -61,6 +65,8 @@ jobs:
       TZ: /usr/share/zoneinfo/UTC
     steps:
       - checkout
+      - run: git submodule sync
+      - run: git submodule update --init
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - restore_cache:
