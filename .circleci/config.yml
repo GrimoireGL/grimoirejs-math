@@ -55,7 +55,7 @@ jobs:
       - run: sh release.sh
       - run:
           name: Move Artifacts
-          command: mv register /tmp/artifacts/
+          command: mv register/ /tmp/artifacts/
       - store_artifacts:
           path: /tmp/artifacts/register
   deploy_master:
@@ -77,7 +77,7 @@ jobs:
       - run: npm run doc
       - run:
           name: Move Artifacts
-          command: mv docs /tmp/artifacts/
+          command: mv docs/ /tmp/artifacts/
       - store_artifacts:
           path: /tmp/artifacts/docs
       - run:
