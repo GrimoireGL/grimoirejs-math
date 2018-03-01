@@ -43,6 +43,9 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
       - restore_cache:
           key: artifact-cache-{{ .Environment.CIRCLE_SHA1 }}
+      - run: sudo apt update && sudo apt install python-pip python-dev
+      - run: pip install awscli --upgrade --user
+      - run: echo 'export PATH=/home/circleci/.local/bin:$PATH' >> $BASH_ENV
       - run: npm test
       - run: sh ./common/e2e.sh
       - run: sh release.sh
