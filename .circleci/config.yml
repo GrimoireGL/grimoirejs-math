@@ -51,13 +51,26 @@ jobs:
       - run: pip install awscli --upgrade --user
       - run: echo 'export PATH=/home/circleci/.local/bin:$PATH' >> $BASH_ENV
       - run: npm test
+      - store_artifacts:
+          path: /home/circleci/project/register
+  e2e_release:
+    docker:
+      - image: circleci/node:9.6
+    environment:
+      TZ: /usr/share/zoneinfo/UTC
+    steps:
+      - checkout
+      - run: git submodule sync
+      - run: git submodule update --init
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - restore_cache:
+          key: artifact-cache-{{ .Environment.CIRCLE_SHA1 }}
+      - run: sudo apt update && sudo apt install python-pip python-dev
+      - run: pip install awscli --upgrade --user
+      - run: echo 'export PATH=/home/circleci/.local/bin:$PATH' >> $BASH_ENV
       - run: sh ./common/e2e.sh
       - run: sh release.sh
-      - run:
-          name: Move Artifacts
-          command: mv register/ /tmp/artifacts/
-      - store_artifacts:
-          path: /tmp/artifacts/register
   deploy_master:
     docker:
       - image: circleci/node:9.6
@@ -75,11 +88,8 @@ jobs:
       - run: pip install awscli --upgrade --user
       - run: echo 'export PATH=/home/circleci/.local/bin:$PATH' >> $BASH_ENV
       - run: npm run doc
-      - run:
-          name: Move Artifacts
-          command: mv docs/ /tmp/artifacts/
       - store_artifacts:
-          path: /tmp/artifacts/docs
+          path: /home/circleci/project/docs
       - run:
           name: document deploy
           command: aws s3 cp /tmp/artifacts/docs/ s3://api.grimoire.gl/$CIRCLE_PROJECT_REPONAME --recursive --acl public-read
@@ -92,6 +102,10 @@ workflows:
       - test:
           requires:
             - build
+      - e2e_release:
+          requires:
+            - build
+            - test
       - deploy_master:
           requires:
             - build
