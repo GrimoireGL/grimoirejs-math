@@ -51,9 +51,7 @@ jobs:
       - run: pip install awscli --upgrade --user
       - run: echo 'export PATH=/home/circleci/.local/bin:$PATH' >> $BASH_ENV
       - run: npm test
-      - store_artifacts:
-          path: /home/circleci/project/register
-  e2e_release:
+  common_e2e:
     docker:
       - image: circleci/node:9.6
     environment:
@@ -70,8 +68,27 @@ jobs:
       - run: pip install awscli --upgrade --user
       - run: echo 'export PATH=/home/circleci/.local/bin:$PATH' >> $BASH_ENV
       - run: sh ./common/e2e.sh
+      - run: mkdir /tmp/artifacts/register && mv register /tmp/artifacts/register
+      - store_artifacts:
+          path: /tmp/artifacts/register
+  npm_release:
+    docker:
+      - image: circleci/node:9.6
+    environment:
+      TZ: /usr/share/zoneinfo/UTC
+    steps:
+      - checkout
+      - run: git submodule sync
+      - run: git submodule update --init
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - restore_cache:
+          key: artifact-cache-{{ .Environment.CIRCLE_SHA1 }}
+      - run: sudo apt update && sudo apt install python-pip python-dev
+      - run: pip install awscli --upgrade --user
+      - run: echo 'export PATH=/home/circleci/.local/bin:$PATH' >> $BASH_ENV
       - run: sh release.sh
-  deploy_master:
+  deploy_docs:
     docker:
       - image: circleci/node:9.6
     environment:
@@ -88,11 +105,12 @@ jobs:
       - run: pip install awscli --upgrade --user
       - run: echo 'export PATH=/home/circleci/.local/bin:$PATH' >> $BASH_ENV
       - run: npm run doc
+      - run: mkdir /tmp/artifacts/docs && mv docs /tmp/artifacts/docs
       - store_artifacts:
-          path: /home/circleci/project/docs
-      - run:
-          name: document deploy
-          command: aws s3 cp /tmp/artifacts/docs/ s3://api.grimoire.gl/$CIRCLE_PROJECT_REPONAME --recursive --acl public-read
+          path: /tmp/artifacts/docs
+      # - run:
+      #     name: document deploy
+      #     command: aws s3 cp /tmp/artifacts/docs/ s3://api.grimoire.gl/$CIRCLE_PROJECT_REPONAME --recursive --acl public-read
 
 workflows:
   version: 2
@@ -102,14 +120,21 @@ workflows:
       - test:
           requires:
             - build
-      - e2e_release:
+      - common_e2e:
           requires:
             - build
             - test
-      - deploy_master:
+      - npm_release:
           requires:
             - build
             - test
-          filters:
-            branches:
-              only: master
+          # filters:
+          #   branches:
+          #     only: master
+      - deploy_docs:
+          requires:
+            - build
+            - test
+          # filters:
+          #   branches:
+          #     only: master
