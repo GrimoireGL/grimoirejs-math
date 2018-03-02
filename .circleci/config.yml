@@ -68,7 +68,7 @@ jobs:
       - run: pip install awscli --upgrade --user
       - run: echo 'export PATH=/home/circleci/.local/bin:$PATH' >> $BASH_ENV
       - run: sh ./common/e2e.sh
-      - run: mkdir /tmp/artifacts/register && mv register /tmp/artifacts/register
+      - run: mkdir -p /tmp/artifacts/register && mv register /tmp/artifacts/register
       - store_artifacts:
           path: /tmp/artifacts/register
   npm_release:
@@ -105,7 +105,7 @@ jobs:
       - run: pip install awscli --upgrade --user
       - run: echo 'export PATH=/home/circleci/.local/bin:$PATH' >> $BASH_ENV
       - run: npm run doc
-      - run: mkdir /tmp/artifacts/docs && mv docs /tmp/artifacts/docs
+      - run: mkdir -p /tmp/artifacts/docs && mv docs /tmp/artifacts/docs
       - store_artifacts:
           path: /tmp/artifacts/docs
       # - run:
