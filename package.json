@@ -75,5 +75,14 @@
       "env",
       "stage-2"
     ]
+  },
+  "e2e": {
+    "dependencies": {
+      "grimoirejs": "beta",
+      "fundamental": "beta",
+      "forward-shading": "beta",
+      "animation": "beta",
+      "gltf": "beta"
+    }
   }
 }
