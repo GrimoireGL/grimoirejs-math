@@ -15,7 +15,8 @@
   ],
   "dependencies": {
     "@types/gl-matrix": "^2.4.0",
-    "gl-matrix": "git+https://github.com/GrimoireGL/gl-matrix.git"
+    "gl-matrix": "git+https://github.com/GrimoireGL/gl-matrix.git",
+    "grimoirejs": "^1.0.9-beta41"
   },
   "devDependencies": {
     "ava": "^0.25.0",
@@ -26,7 +27,6 @@
     "babel-preset-stage-2": "^6.24.1",
     "babel-register": "^6.26.0",
     "condition-circle": "^2.0.1",
-    "grimoirejs": "^1.0.9-beta41",
     "grimoirejs-cauldron": "^4.2.0-beta3",
     "semantic-release": "^12.4.1",
     "ts-loader": "^3.5.0",
@@ -35,9 +35,6 @@
     "typescript": "^2.7.2",
     "webpack": "^3.11.0",
     "webpack-shell-plugin": "^0.5.0"
-  },
-  "peerDependencies": {
-    "grimoirejs": "^0.16.0"
   },
   "repository": {
     "type": "git",
