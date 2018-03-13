@@ -24,6 +24,7 @@ jobs:
             - ~/.npm/_cacache
             - ~/.cache/yarn
             - node_modules/
+      - run: yarn list
       - save-cache:
           key: artifact-cache-{{ .Environment.CIRCLE_SHA1 }}
           paths:
