@@ -26,7 +26,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "babel-register": "^6.26.0",
     "condition-circle": "^2.0.1",
-    "grimoirejs": "^1.0.9-beta17",
+    "grimoirejs": "^1.0.9-beta41",
     "grimoirejs-cauldron": "^4.2.0-beta3",
     "semantic-release": "^12.4.1",
     "ts-loader": "^3.5.0",
