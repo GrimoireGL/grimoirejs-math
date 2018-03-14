@@ -16,7 +16,7 @@
   "dependencies": {
     "@types/gl-matrix": "^2.4.0",
     "gl-matrix": "git+https://github.com/GrimoireGL/gl-matrix.git",
-    "grimoirejs": "^1.0.9-beta41"
+    "grimoirejs": "1.0.9-beta41"
   },
   "devDependencies": {
     "ava": "^0.25.0",
