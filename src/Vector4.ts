@@ -1,9 +1,8 @@
-///<reference path="./gl-matrix.d.ts"/>
-
 import VectorBase from "./VectorBase";
-import {GLM, vec4} from "gl-matrix";
+import { vec4 } from "gl-matrix";
+import { Undef } from "grimoirejs/ref/Tool/Types";
 
-class Vector4 extends VectorBase {
+export default class Vector4 extends VectorBase<vec4> {
 
   public static get XUnit(): Vector4 {
     return new Vector4(1, 0, 0, 0);
@@ -71,18 +70,20 @@ class Vector4 extends VectorBase {
 
 
   public static min(v1: Vector4, v2: Vector4): Vector4 {
-    return new Vector4(VectorBase.__fromGenerationFunction(v1, v2, (i, _v1, _v2) => Math.min(_v1.rawElements[i], _v2.rawElements[i])));
+    const newVec = vec4.create();
+    return new Vector4(vec4.min(newVec, v1.rawElements, v2.rawElements));
   }
 
   public static max(v1: Vector4, v2: Vector4): Vector4 {
-    return new Vector4(VectorBase.__fromGenerationFunction(v1, v2, (i, _v1, _v2) => Math.max(_v1.rawElements[i], _v2.rawElements[i])));
+    const newVec = vec4.create();
+    return new Vector4(vec4.max(newVec, v1.rawElements, v2.rawElements));
   }
 
   public static angle(v1: Vector4, v2: Vector4): number {
     return Math.acos(Vector4.dot(v1.normalized, v2.normalized));
   }
 
-  public static parse(str: string): Vector4 {
+  public static parse(str: string): Undef<Vector4> {
     const parseResult = VectorBase.__parse(str);
     const elements = parseResult.elements;
     if (!elements || (elements.length !== 1 && elements.length !== 4)) {
@@ -106,23 +107,22 @@ class Vector4 extends VectorBase {
     return result;
   }
   public static lerp(v1: Vector4, v2: Vector4, t: number): Vector4 {
-    return new Vector4(VectorBase.__fromGenerationFunction(v1, v2, (i, v1_, v2_) => {
-      return v1_.rawElements[i] + (v2_.rawElements[i] - v1_.rawElements[i]) * t;
-    }));
+    const newVec = vec4.create();
+    return new Vector4(vec4.lerp(newVec, v1.rawElements, v2.rawElements, t));
   }
 
   /*
    * Static properties
    */
-  constructor(x: GLM.IArray);
+  constructor(vec4: vec4);
   constructor(x: number, y: number, z: number, w: number);
-  constructor(x: number | GLM.IArray, y?: number, z?: number, w?: number) {
+  constructor(x: number | vec4, y?: number, z?: number, w?: number) {
     super();
-    if (typeof y === "undefined") {
-      this.rawElements = <GLM.IArray>x;
-      return;
+    if (y === undefined) {
+      this.rawElements = x as vec4;
+    } else {
+      this.rawElements = vec4.fromValues(x as number, y, z!, w!);
     }
-    this.rawElements = [<number>x, y, z, w];
   }
 
   public get normalized() {
@@ -193,7 +193,7 @@ class Vector4 extends VectorBase {
     return Vector4.nearlyEquals(this, v);
   }
 
-  public get ElementCount(): number { return 4; }
+  public get ElementCount(): 4 { return 4; }
 
   public toString(): string {
     return `(${this.X}, ${this.Y}, ${this.Z}, ${this.W})`;
@@ -202,8 +202,4 @@ class Vector4 extends VectorBase {
   public toDisplayString(): string {
     return `Vector4${this.toString()}`;
   }
-
 }
-
-
-export default Vector4;

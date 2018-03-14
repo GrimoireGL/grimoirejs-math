@@ -1,11 +1,9 @@
-///<reference path="./gl-matrix.d.ts"/>
 
-import {GLM} from "gl-matrix";
-class MatrixBase {
+export default abstract class MatrixBase<T extends Float32Array> {
 
-  public rawElements: GLM.IArray;
+  public rawElements!: T;
 
-  protected static __elementEquals(m1: MatrixBase, m2: MatrixBase): boolean {
+  protected static __elementEquals<T extends Float32Array>(m1: MatrixBase<T>, m2: MatrixBase<T>): boolean {
     if (m1.RowCount !== m2.RowCount || m1.ColmunCount !== m2.ColmunCount) {
       return false;
     }
@@ -18,20 +16,10 @@ class MatrixBase {
     return true;
   }
 
-  public get RowCount(): number {
-    return 0;
-  }
+  abstract get RowCount(): number;
+  abstract get ColmunCount(): number;
 
-  public get ColmunCount(): number {
-    return 0;
-  }
-
-  public getAt(row: number, colmun: number): number {
-    throw new Error("Not implemented");
-  }
-
-  public getBySingleIndex(index: number): number {
-    throw new Error("Not implemented");
-  }
+  abstract getAt(row: number, colmun: number): number;
+  abstract getBySingleIndex(index: number): number;
 }
-export default MatrixBase;
+

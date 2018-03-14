@@ -1,5 +1,5 @@
 import Vector2 from "./Vector2";
-class Rectangle {
+export default class Rectangle {
 
   private _left: number;
   private _bottom: number;
@@ -55,7 +55,7 @@ class Rectangle {
     } else {
       x = xOrPoint;
     }
-    return this.Left <= x && this.Right >= x && this.Top <= y && this.Bottom >= y;
+    return this.Left <= x && this.Right >= x && this.Top <= y! && this.Bottom >= y!;
   }
 
   /**
@@ -63,7 +63,7 @@ class Rectangle {
    * @param  {Vector2} x [description]
    * @return {Vector2}   [description]
    */
-  public toLocal(x: Vector2): Vector2;
+  public toLocal(point: Vector2): Vector2;
   public toLocal(x: number, y: number): number[];
   public toLocal(xOrPoint: Vector2 | number, y?: number): any {
     let x;
@@ -74,8 +74,8 @@ class Rectangle {
       x = xOrPoint;
     }
     x -= this.Left;
-    y -= this.Bottom;
-    return xOrPoint instanceof Vector2 ? new Vector2(x, y) : [x, y];
+    y! -= this.Bottom;
+    return xOrPoint instanceof Vector2 ? new Vector2(x, y!) : [x, y];
   }
 
   /**
@@ -83,15 +83,15 @@ class Rectangle {
    * @param  {Vector2} x [description]
    * @return {Vector2}   [description]
    */
-  public toLocalNormalized(x: Vector2): Vector2;
+  public toLocalNormalized(point: Vector2): Vector2;
   public toLocalNormalized(x: number, y: number): number[];
   public toLocalNormalized(xOrPoint: Vector2 | number, y?: number): any {
-    if(xOrPoint instanceof Vector2){
+    if (xOrPoint instanceof Vector2) {
       const v = this.toLocal(xOrPoint);
       return new Vector2(v.X / this.Width, v.Y / this.Height);
-    }else{
-      const v = this.toLocal(xOrPoint,y);
-      return [v[0]/this.Width, v[1]/ this.Height];
+    } else {
+      const v = this.toLocal(xOrPoint, y!);
+      return [v[0] / this.Width, v[1] / this.Height];
     }
   }
 
@@ -100,21 +100,17 @@ class Rectangle {
    * @param  {Vector2} x [description]
    * @return {Vector2}   [description]
    */
-  public toAbsolute(x: Vector2): Vector2;
+  public toAbsolute(point: Vector2): Vector2;
   public toAbsolute(x: number, y: number): number[];
   public toAbsolute(xOrPoint: Vector2 | number, y?: number): any {
-    if(xOrPoint instanceof Vector2){
+    if (xOrPoint instanceof Vector2) {
       return new Vector2(xOrPoint.X + this.Left, xOrPoint.Y + this.Top);
-    }else{
-      return [xOrPoint + this.Left, y + this.Top];
+    } else {
+      return [xOrPoint + this.Left, y! + this.Top];
     }
   }
-
-
 
   public toString(): string {
     return `Rectangle(${this.Left},${this.Top}-${this.Right},${this.Bottom})`;
   }
-
 }
-export default Rectangle;

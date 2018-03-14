@@ -1,33 +1,34 @@
-///<reference path="./gl-matrix.d.ts"/>
+
 
 import Vector3 from "./Vector3";
+import { Nullable } from "grimoirejs/ref/Tool/Types";
 /**
  * Axis-Aligned Bounding Box implementation
  */
-class AABB {
+export default class AABB {
 
   constructor(initialPoints?: Vector3[]) {
     if (initialPoints) {
-      initialPoints.forEach(f => this.expand(f));
+      initialPoints.forEach((p) => this.expand(p));
     }
   }
   /**
    * AABB's vertex in most left,most bottom,most far.
    * @type {Vector3}
    */
-  public pointLBF: Vector3;
+  public pointLBF!: Vector3;
 
   /**
   * AABB's vertex in most right,most top,most near.
   * @type {Vector3}
   */
-  public pointRTN: Vector3;
+  public pointRTN!: Vector3;
 
   /**
    * Center of this AABB
    * @type {Vector3}
    */
-  private _center: Vector3;
+  private _center!: Nullable<Vector3>;
 
   /**
    * Width of this AABB
@@ -76,10 +77,8 @@ class AABB {
    * Clean up this AABB with initial value.
    */
   public clear(): void {
-    this.pointLBF = null;
-    this.pointRTN = null;
+    delete this.pointLBF;
+    delete this.pointRTN;
     this._center = null;
   }
 }
-
-export default AABB;

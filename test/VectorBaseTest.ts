@@ -1,9 +1,9 @@
 import test from 'ava';
 
-import VectorBase from '../lib-es5/VectorBase';
-import Vector2 from '../lib-es5/Vector2';
-import Vector3 from '../lib-es5/Vector3';
-import Vector4 from '../lib-es5/Vector4';
+import VectorBase from '../src/VectorBase';
+import Vector2 from '../src/Vector2';
+import Vector3 from '../src/Vector3';
+import Vector4 from '../src/Vector4';
 
 let error = 0.01;
 

@@ -1,18 +1,15 @@
-///<reference path="./gl-matrix.d.ts"/>
-
-import {GLM} from "gl-matrix";
 import IVectorParseDescription from "./IVectorParseDescription";
 /**
  * Base class of vector.
  */
-class VectorBase {
+export default abstract class VectorBase<T extends Float32Array> {
 
   /**
    * Actual array represents components of this instance.
    */
-  public rawElements: GLM.IArray;
-  private _magnitudeSquaredCache: number = -1;
-  private _magnitudeCache: number = -1;
+  public rawElements!: T;
+  private _magnitudeSquaredCache = -1;
+  private _magnitudeCache = -1;
 
   /**
    * Length of this vector.
@@ -29,10 +26,7 @@ class VectorBase {
    * This is for override.
    * @return {number} [description]
    */
-  public get ElementCount(): number {
-    return 0;
-  }
-
+  public abstract get ElementCount(): number;
   /**
    * Get squred length of this elements.
    */
@@ -48,7 +42,7 @@ class VectorBase {
     return this._magnitudeSquaredCache;
   }
 
-  protected static __elementEquals(v1: VectorBase, v2: VectorBase): boolean {
+  protected static __elementEquals<T extends Float32Array>(v1: VectorBase<T>, v2: VectorBase<T>): boolean {
     if (v1.ElementCount !== v2.ElementCount) {
       return false;
     }
@@ -60,7 +54,7 @@ class VectorBase {
     return true;
   }
 
-  protected static __nearlyElementEquals(v1: VectorBase, v2: VectorBase): boolean {
+  protected static __nearlyElementEquals<T extends Float32Array>(v1: VectorBase<T>, v2: VectorBase<T>): boolean {
     if (v1.ElementCount !== v2.ElementCount) {
       return false;
     }
@@ -71,14 +65,6 @@ class VectorBase {
       }
     }
     return true;
-  }
-
-  protected static __fromGenerationFunction<T extends VectorBase>(v1: T, v2: T, gen: (i: number, v1: T, v2: T) => number): GLM.IArray {
-    let f = new Float32Array(v1.ElementCount);
-    for (let i = 0; i < f.length; i++) {
-      f[i] = gen(i, v1, v2);
-    }
-    return f;
   }
 
   protected static __parse(str: string): IVectorParseDescription {
@@ -118,4 +104,4 @@ class VectorBase {
   }
 }
 
-export default VectorBase;
+
