@@ -28,7 +28,7 @@
     "grimoirejs-cauldron": "^3.1.6",
     "semantic-release": "^7.0.2",
     "ts-loader": "^2.3.3",
-    "typedoc": "^0.8.0",
+    "typedoc": "^0.15.3",
     "typescript": "^2.4.2",
     "webpack": "^3.5.5",
     "webpack-shell-plugin": "^0.5.0"
